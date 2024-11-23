@@ -1,0 +1,57 @@
+@startuml
+
+class Usuario {
+    +idUsuario: int
+    +nombre: String
+    +correo: String
+    +rol: String
+    +perfil: String
+    +CalendarioUsuario: calendario
+}
+
+class Calendario {
+    +listaEventos: List<Evento>
+}
+
+class Evento {
+    +idEvento: int
+    +titulo: String
+    +descripcion: String
+    +fechaHoraInicio: DateTime
+    +fechaHoraFin: DateTime
+    +ubicacion: String
+    +categoria: Categoria
+    +estado: String
+    +creador: Usuario
+    +listaComentarios: List<Comentario>
+}
+
+class Comentario {
+    +idComentario: int
+    +texto: String
+    +fechaCreacion: DateTime
+    +autor: Usuario
+}
+
+class Categoria {
+    +idCategoria: int
+    +nombre: String
+    +eventos: List<Evento>
+}
+
+class Notificacion {
+    +idNotificacion: int
+    +mensaje: String
+    +fechaEnvio: DateTime
+    +destinatario: Usuario
+}
+
+Usuario "1--*" -- "0..*" Evento : crear, añadir o modificar
+Usuario "1..*" -- "0..*" Comentario : escribe
+Evento "1" o-- "0..*" Comentario : contiene
+Evento "1" o-- "1..*" Categoria : pertenece
+Usuario "1" -- "0..*" Notificacion : recibe
+Usuario "1" -- "1" Calendario : puede ver
+Calendario "1..*" o-- "0..*" Evento: tiene
+
+@enduml

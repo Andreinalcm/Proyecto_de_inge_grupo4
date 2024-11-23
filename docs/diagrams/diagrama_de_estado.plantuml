@@ -1,0 +1,39 @@
+@startuml
+
+hide empty description
+
+' Estado inicial
+[*] --> Registro : Usuario se registra
+
+' Estados del Usuario
+Registro --> UsuarioInactivo : Usuario registrado pero no activo
+UsuarioInactivo --> UsuarioActivo : Activar cuenta
+UsuarioActivo --> UsuarioSuspendido : Cuenta suspendida por violación de reglas
+UsuarioSuspendido --> UsuarioActivo : Reactivar cuenta
+UsuarioActivo --> [*]
+UsuarioActivo --> Usuario_Sesión_Iniciada : Iniciar sesión
+Usuario_Sesión_Iniciada --> [*] : Cerrar Sesión
+[*] --> Usuario_Sesión_Iniciada : Iniciar sesión
+
+' Estados del Evento
+[*] --> CreacionEvento : Crear evento
+CreacionEvento --> EventoBorrador : Guardar como borrador
+EventoBorrador --> Publicado : Publicar evento
+Publicado --> Modificado: Modificar evento
+Modificado --> Archivado: Archivar evento
+Publicado --> Archivado : Archivar evento
+EventoBorrador --> Cancelado : Cancelar evento
+Cancelado --> [*]
+Archivado --> [*]
+
+' Estados del Comentario
+[*] --> CreacionComentario : Crear comentario
+CreacionComentario --> ComentarioPublicado : Publicar comentario
+ComentarioPublicado --> ComentarioEliminado : Eliminar comentario
+ComentarioPublicado --> [*]
+ComentarioEliminado --> [*]
+
+' Estados de las Notificaciones
+[*] --> CreacionNotificacion : Crear
+
+@enduml

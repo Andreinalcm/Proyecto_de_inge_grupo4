@@ -1,0 +1,91 @@
+Modelo de dominio
+
+Entidades y Atributos:
+
+1- Usuario:
+
+Atributos:
+
+idUsuario (int): Identificador único del usuario.
+nombre (String): Nombre del usuario.
+correo (String): Correo electrónico del usuario.
+rol (enum): Rol del usuario (Estudiante, Profesor, Administrativo, Moderador, Administrador).
+perfil (String): Información adicional del perfil.
+listaEventosCreados (List<Evento>): Eventos creados por el usuario.
+listaComentarios (List<Comentario>): Comentarios realizados por el usuario.
+
+Relaciones:
+
+Crea y gestiona eventos.
+Comenta en eventos.
+Puede recibir notificaciones.
+
+2- Evento:
+
+Atributos:
+
+idEvento (int): Identificador único del evento.
+titulo (String): Título del evento.
+descripcion (String): Descripción del evento.
+fechaHoraInicio (DateTime): Fecha y hora de inicio.
+fechaHoraFin (DateTime): Fecha y hora de finalización.
+ubicacion (String): Lugar donde se realizará el evento.
+categoria (Categoria): Categoría del evento (referencia).
+estado (enum): Estado del evento (Pendiente, Aprobado, Rechazado).
+creador (Usuario): Usuario creador del evento.
+listaComentarios (List<Comentario>): Comentarios relacionados al evento.
+
+Relaciones:
+
+Asociado a un usuario como creador.
+Clasificado dentro de una categoría.
+
+3- Comentario:
+
+Atributos:
+
+idComentario (int): Identificador único del comentario.
+texto (String): Contenido del comentario.
+fechaCreacion (DateTime): Fecha y hora de creación.
+autor (Usuario): Usuario autor del comentario.
+
+Relaciones:
+
+Pertenece a un evento.
+Escrito por un usuario.
+
+
+4- Categoria:
+
+Atributos:
+
+idCategoria (int): Identificador único de la categoría.
+nombre (String): Nombre de la categoría.
+eventos (List<Evento>): Eventos asociados.
+
+Relaciones:
+
+Contiene múltiples eventos.
+
+5-Notificacion:
+
+Atributos:
+
+idNotificacion (int): Identificador único de la notificación.
+mensaje (String): Contenido de la notificación.
+fechaEnvio (DateTime): Fecha y hora de envío.
+destinatario (Usuario): Usuario receptor de la notificación.
+
+Relaciones:
+
+Asignada a un usuario.
+
+6- Calendario
+
+Atributos:
+
+listaEventos (List<Evento>): Eventos asociados.
+
+Relaciones:
+
+Contiene múltiples eventos.
