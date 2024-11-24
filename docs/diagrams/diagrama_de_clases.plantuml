@@ -1,4 +1,6 @@
-@startuml
+@startuml Diagrama de clases
+
+hide empty description
 
 class Usuario {
     +idUsuario: int
