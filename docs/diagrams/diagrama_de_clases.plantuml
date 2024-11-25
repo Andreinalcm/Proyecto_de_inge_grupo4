@@ -1,18 +1,21 @@
 @startuml Diagrama de clases
 
-hide empty description
 
 class Usuario {
     +idUsuario: int
     +nombre: String
     +correo: String
-    +rol: String
+    +rol: Rol
     +perfil: String
-    +CalendarioUsuario: calendario
+    +eventosCreados: List<Evento>
 }
 
 class Calendario {
-    +listaEventos: List<Evento>
+    +idCalendario: int
+    +eventos: List<Evento>
+    +meses: List<string>
+    +dias: List<int>
+    +anios: List<int>
 }
 
 class Evento {
@@ -48,12 +51,18 @@ class Notificacion {
     +destinatario: Usuario
 }
 
-Usuario "1--*" -- "0..*" Evento : crear, añadir o modificar
+class Rol{
+    +idRol: int
+    +nombre: String
+}
+
+Usuario "1..*" -- "0..*" Evento : gestiona
 Usuario "1..*" -- "0..*" Comentario : escribe
+Usuario "1..*" -- "1" Rol : tiene
 Evento "1" o-- "0..*" Comentario : contiene
 Evento "1" o-- "1..*" Categoria : pertenece
 Usuario "1" -- "0..*" Notificacion : recibe
 Usuario "1" -- "1" Calendario : puede ver
-Calendario "1..*" o-- "0..*" Evento: tiene
+Calendario "1..*" o-- "0..*" Evento: muestra
 
 @enduml
