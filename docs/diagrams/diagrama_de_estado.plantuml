@@ -35,7 +35,7 @@ ComentarioEliminado --> [*]
 
 ' Estados de las Notificaciones
 [*] --> CreacionNotificacion : Crear
-CreacionNotificacion --> VisualizarNotificacion : Mostrar Notificacion
-VisualizarNotificacion --> [*] : Descartar Notificacion 
+CreacionNotificacion --> NotificacionVisible : Mostrar Notificacion
+NotificacionVisible --> [*] : Descartar Notificacion 
 
 @enduml
