@@ -1,4 +1,4 @@
-@startuml Diagrama ded estados
+@startuml Diagrama de estados
 
 hide empty description
 
@@ -35,5 +35,7 @@ ComentarioEliminado --> [*]
 
 ' Estados de las Notificaciones
 [*] --> CreacionNotificacion : Crear
+CreacionNotificacion --> NotificacionVisible : Mostrar Notificacion
+NotificacionVisible --> [*] : Descartar Notificacion 
 
 @enduml
