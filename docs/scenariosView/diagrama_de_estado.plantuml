@@ -34,8 +34,13 @@ ComentarioPublicado --> [*]
 ComentarioEliminado --> [*]
 
 ' Estados de las Notificaciones
+state EstadoNotificacion <<choice>>
 [*] --> CreacionNotificacion : Crear
-CreacionNotificacion --> NotificacionVisible : Mostrar Notificacion
-NotificacionVisible --> [*] : Descartar Notificacion 
+CreacionNotificacion --> NotificacionEnviada : enviar notificación
+NotificacionEnviada --> EstadoNotificacion
+EstadoNotificacion --> Leida : [marcar como leída]
+EstadoNotificacion --> Borrada : [borrar]
+Leida --> Borrada
+Borrada --> [*]
 
 @enduml

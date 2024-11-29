@@ -49,6 +49,7 @@ class Notificacion {
     +mensaje: String
     +fechaEnvio: DateTime
     +destinatario: Usuario
+    +leida: bool
 }
 
 class Rol{
