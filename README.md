@@ -17,8 +17,8 @@ C.I: 29.611.486,  sección: C1
 
 ### Diagrama de clases
 
-![Diagrama de clases][../img/clases.jpg]
+![Diagrama de clases][https://github.com/Andreinalcm/Proyecto_de_inge/blob/55fca45dafaa84c993db7138f39c0a3acc4d6787/img/clases.jpg]
 
 ### Diagrama de estados
 
-![Diagrama de estados][../img/estados.jpg]
+![Diagrama de estados][https://github.com/Andreinalcm/Proyecto_de_inge/blob/55fca45dafaa84c993db7138f39c0a3acc4d6787/img/estados.jpg]
