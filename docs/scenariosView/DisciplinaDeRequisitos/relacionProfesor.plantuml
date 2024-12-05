@@ -1,0 +1,27 @@
+@startuml Profesor
+
+hide empty description
+
+state Profesor{
+    Registro_Nuevo_Usuario:
+    Sesión_Activa:
+    Creando_Publicacción:
+    Eliminando_Publicación:
+    Viendo_Publicación:
+    state C <<choice>>
+    Sesión_Cerrada:
+
+    [*] --> C : ¿Nuevo Usuario?
+    C --> Registro_Nuevo_Usuario : Registrando Usuario
+    C --> Sesión_Activa : Iniciando Sesión
+    Registro_Nuevo_Usuario --> Sesión_Activa : Iniciando Sesión
+    Sesión_Activa --> Viendo_Publicación : Entrando en una Publicación
+    Sesión_Activa --> Eliminando_Publicación : Eliminar publicación
+    Sesión_Activa --> Creando_Publicacción : Hacer una publicación
+    Viendo_Publicación --> Sesión_Cerrada :  Cerrando Sesión
+    Eliminando_Publicación --> Sesión_Cerrada : Cerrando Sesión
+    Creando_Publicacción --> Sesión_Cerrada : Cerrando Sesión
+    Sesión_Cerrada --> [*]
+}
+
+@enduml
