@@ -1,17 +1,11 @@
 # VirtualCiencias
 
-Andreina Lacruz
-C.I: 30.356.458, sección: C2
-Angelo Alfonzo
-C.I: 29.583.440, sección: C2
-Eduard Cañizales
-C.I: 27.812.173,  sección: C2
-Glenn Páez
-C.I: 28.175.423,  sección: C2
-Luis Tortoza
-C.I: 28.149.799,  sección: C2
-Manuel Briceño
-C.I: 29.611.486,  sección: C1
+1. Andreina Lacruz
+2. Angelo Alfonzo
+3. Eduard Cañizales
+4. Glenn Páez
+5. Luis Tortoza
+6. Manuel Briceño
 
 ## Modelo del Dominio
 
@@ -22,3 +16,18 @@ C.I: 29.611.486,  sección: C1
 ### Diagrama de estados
 
 ![Diagrama de estados](https://github.com/Andreinalcm/Proyecto_de_inge/blob/55fca45dafaa84c993db7138f39c0a3acc4d6787/img/estados.jpg)
+
+## Disciplina de Requisitos
+
+### Diagrama de casos de uso
+
+![Relacion moderador](https://github.com/Andreinalcm/Proyecto_de_inge/blob/55fca45dafaa84c993db7138f39c0a3acc4d6787/docs/scenariosView/DisciplinaDeRequisitos/diagramaDeCasosDeUsor.jpg)
+
+### Diagramas de Relación de los casos de uso
+
+![Relacion moderador](https://github.com/Andreinalcm/Proyecto_de_inge/blob/55fca45dafaa84c993db7138f39c0a3acc4d6787/docs/scenariosView/DisciplinaDeRequisitos/relacionModerador.jpg)
+
+![Relacion profesor](https://github.com/Andreinalcm/Proyecto_de_inge/blob/55fca45dafaa84c993db7138f39c0a3acc4d6787/docs/scenariosView/DisciplinaDeRequisitos/relacionProfesor.jpg)
+
+### Protótipo de Interfáz
+

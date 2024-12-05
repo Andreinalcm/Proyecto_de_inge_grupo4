@@ -1,8 +1,14 @@
 @startuml Hacer una publicacion uc7
-[*] --> EsperandoContenido
-EsperandoContenido --> ValidandoContenido : Contenido ingresado
-ValidandoContenido --> PublicacionHecha : Contenido válido
-ValidandoContenido --> ErrorContenido : Contenido inválido
-ErrorContenido --> EsperandoContenido : Reintentar
-PublicacionHecha --> [*] : Publicación realizada
+
+hide empty description
+
+state HacerUnaPublicacion{
+    [*] --> EsperandoContenido
+    EsperandoContenido --> ValidandoContenido : Contenido ingresado
+    ValidandoContenido --> PublicacionHecha : Contenido válido
+    ValidandoContenido --> ErrorContenido : Contenido inválido
+    ErrorContenido --> EsperandoContenido : Reintentar
+    PublicacionHecha --> [*] : Publicación realizada
+}
+
 @enduml

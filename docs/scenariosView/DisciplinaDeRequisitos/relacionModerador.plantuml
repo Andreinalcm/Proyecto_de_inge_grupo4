@@ -1,4 +1,5 @@
 @startuml Moderador
+
 state Moderador {
     [*] --> Inactivo
     
