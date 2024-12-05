@@ -1,0 +1,58 @@
+@startuml Casos de uso
+
+actor Usuario as Actor1
+actor Moderador as Actor2
+actor Estudiante as Actor3
+actor Profesor as Actor4
+actor "Personal de Apoyo" as Actor5
+
+left to right direction
+
+rectangle VirtualCiencias{
+usecase "UC1 - Registrar usuario" as UC1
+usecase "UC2 - Iniciar sesión" as UC2
+usecase "UC3 - Publicar evento" as UC3
+usecase "UC4 - Descartar Evento" as UC4
+usecase "UC5 - Modificar Evento" as UC5
+usecase "UC6 - Eliminar Evento" as UC6
+usecase "UC7 - Hacer una Publicación" as UC7
+usecase "UC8 - "Descartar Publicación" as UC8
+usecase "UC9 - Eliminar publicación" as UC9
+usecase "UC10 - Ver Publicación" as UC10
+usecase "UC11 - Comentar publicación" as UC11
+usecase "UC12 - Eliminar Comentario" as UC12
+usecase "UC13 - Revisar Calendario" as UC13
+usecase "UC14 - Añadir Evento" as UC14
+usecase "UC15 - Editar Perfil" as UC15
+usecase "UC16 - Cerrar Sesión" as UC16
+
+UC3 <.. UC4 : <<Extend>>
+UC7 <.. UC8 : <<Extend>>
+UC11 <.. UC12 : <<Extend>>
+UC13 <.. UC14 : <<Extend>>
+
+Actor1 -- UC1
+Actor1 -- UC2
+Actor1 -- UC3
+Actor1 -- UC5
+Actor1 -- UC6
+Actor1 -- UC10
+Actor1 -- UC11
+Actor1 -- UC13
+Actor1 -- UC15
+Actor1 -- UC16
+
+Actor2 -- UC6
+Actor2 -- UC9
+Actor2 -- UC12
+
+Actor4 -- UC7
+Actor4 -- UC9
+
+Actor1 <|-- Actor2
+Actor1 <|-- Actor3
+Actor1 <|-- Actor4
+Actor1 <|-- Actor5
+}
+
+@enduml

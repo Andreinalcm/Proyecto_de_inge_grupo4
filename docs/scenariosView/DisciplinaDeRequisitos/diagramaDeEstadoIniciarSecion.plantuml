@@ -1,0 +1,9 @@
+@startuml Iniciar sesión uc2
+
+[*] --> EsperandoLogin
+EsperandoLogin --> ValidandoCredenciales : Usuario ingresa credenciales
+ValidandoCredenciales --> SesionActiva : Credenciales correctas
+ValidandoCredenciales --> ErrorCredenciales : Credenciales incorrectas
+ErrorCredenciales --> EsperandoLogin : Reintentar
+SesionActiva --> [*] : Inicio de sesión exitoso
+@enduml

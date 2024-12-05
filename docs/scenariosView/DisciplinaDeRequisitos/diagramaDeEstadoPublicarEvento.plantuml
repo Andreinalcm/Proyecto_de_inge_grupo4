@@ -1,0 +1,8 @@
+@startuml Publicar evento uc3
+[*] --> EsperandoDetallesEvento
+EsperandoDetallesEvento --> ValidandoEvento : Detalles ingresados
+ValidandoEvento --> EventoPublicado : Evento válido
+ValidandoEvento --> ErrorValidacionEvento : Evento inválido
+ErrorValidacionEvento --> EsperandoDetallesEvento : Reintentar
+EventoPublicado --> [*] : Evento publicado
+@enduml
