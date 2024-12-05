@@ -29,5 +29,7 @@
 
 ![Relacion profesor](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/efe963cda857ce36b256a970acc26d69aeb11559/docs/scenariosView/DisciplinaDeRequisitos/relacionProfesor.jpg)
 
+![Relacion usuario](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/efe963cda857ce36b256a970acc26d69aeb11559/docs/scenariosView/DisciplinaDeRequisitos/relacionUsuario.jpg)
+
 ### Protótipo de Interfáz
 
