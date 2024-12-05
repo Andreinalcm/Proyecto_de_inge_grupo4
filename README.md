@@ -21,7 +21,7 @@
 
 ### Diagrama de casos de uso
 
-![Relacion moderador](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/efe963cda857ce36b256a970acc26d69aeb11559/docs/scenariosView/DisciplinaDeRequisitos/DiagramaDeCasosDeUso.jpg)
+![Relacion moderador](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/efe963cda857ce36b256a970acc26d69aeb11559/docs/scenariosView/DisciplinaDeRequisitos/diagramaDeCasosDeUso.jpg)
 
 ### Diagramas de Relación de los casos de uso
 
