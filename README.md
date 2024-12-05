@@ -11,11 +11,11 @@
 
 ### Diagrama de clases
 
-![Diagrama de clases](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/efe963cda857ce36b256a970acc26d69aeb11559/docs/scenariosView/ModeloDeDominio/diagrama_de_clases.jpg)
+![Diagrama de clases](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/efe963cda857ce36b256a970acc26d69aeb11559/docs/scenariosView/ModeloDedominio/diagrama_de_clases.jpg)
 
 ### Diagrama de estados
 
-![Diagrama de estados](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/efe963cda857ce36b256a970acc26d69aeb11559/docs/scenariosView/ModeloDeDominio/diagramaDeEstado.jpg)
+![Diagrama de estados](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/efe963cda857ce36b256a970acc26d69aeb11559/docs/scenariosView/ModeloDedominio/diagramaDeEstado.jpg)
 
 ## Disciplina de Requisitos
 
