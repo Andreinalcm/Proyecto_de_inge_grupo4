@@ -11,23 +11,23 @@
 
 ### Diagrama de clases
 
-![Diagrama de clases](https://github.com/Andreinalcm/Proyecto_de_inge/blob/55fca45dafaa84c993db7138f39c0a3acc4d6787/img/clases.jpg)
+![Diagrama de clases](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/efe963cda857ce36b256a970acc26d69aeb11559/docs/scenariosView/ModeloDeDominio/diagrama_de_clases.jpg)
 
 ### Diagrama de estados
 
-![Diagrama de estados](https://github.com/Andreinalcm/Proyecto_de_inge/blob/55fca45dafaa84c993db7138f39c0a3acc4d6787/img/estados.jpg)
+![Diagrama de estados](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/efe963cda857ce36b256a970acc26d69aeb11559/docs/scenariosView/ModeloDeDominio/diagramaDeEstado.jpg)
 
 ## Disciplina de Requisitos
 
 ### Diagrama de casos de uso
 
-![Relacion moderador](https://github.com/Andreinalcm/Proyecto_de_inge/blob/55fca45dafaa84c993db7138f39c0a3acc4d6787/docs/scenariosView/DisciplinaDeRequisitos/diagramaDeCasosDeUsor.jpg)
+![Relacion moderador](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/efe963cda857ce36b256a970acc26d69aeb11559/docs/scenariosView/DisciplinaDeRequisitos/DiagramaDeCasosDeUso.jpg)
 
 ### Diagramas de Relación de los casos de uso
 
-![Relacion moderador](https://github.com/Andreinalcm/Proyecto_de_inge/blob/55fca45dafaa84c993db7138f39c0a3acc4d6787/docs/scenariosView/DisciplinaDeRequisitos/relacionModerador.jpg)
+![Relacion moderador](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/efe963cda857ce36b256a970acc26d69aeb11559/docs/scenariosView/DisciplinaDeRequisitos/relacionModerador.jpg)
 
-![Relacion profesor](https://github.com/Andreinalcm/Proyecto_de_inge/blob/55fca45dafaa84c993db7138f39c0a3acc4d6787/docs/scenariosView/DisciplinaDeRequisitos/relacionProfesor.jpg)
+![Relacion profesor](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/efe963cda857ce36b256a970acc26d69aeb11559/docs/scenariosView/DisciplinaDeRequisitos/relacionProfesor.jpg)
 
 ### Protótipo de Interfáz
 
