@@ -25,7 +25,7 @@
 
 ### Diagramas de Relación de los casos de uso
 
-![Relacion moderador](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/efe963cda857ce36b256a970acc26d69aeb11559/docs/scenariosView/DisciplinaDeRequisitos/relacionModerador.jpg)
+![Relacion moderador](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/232cb432e64c4709d000a9bed92d00970ae84f64/docs/scenariosView/DisciplinaDeRequisitos/relacionModerador.jpg)
 
 ![Relacion profesor](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/efe963cda857ce36b256a970acc26d69aeb11559/docs/scenariosView/DisciplinaDeRequisitos/relacionProfesor.jpg)
 
