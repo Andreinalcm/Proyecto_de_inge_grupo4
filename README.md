@@ -11,11 +11,11 @@
 
 ### Diagrama de clases
 
-![Diagrama de clases](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/4def01a5c68bcc08acdbd3900856784e96c36145/docs/scenariosView/ModeloDedominio/diagrama_de_clases.jpg)
+![Diagrama de clases](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/250c393e3611c2fde5518c48d699a0797d3a06d9/docs/scenariosView/ModeloDedominio/diagrama_de_clases.jpg)
 
 ### Diagrama de estados
 
-![Diagrama de estados](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/4def01a5c68bcc08acdbd3900856784e96c36145/docs/scenariosView/ModeloDedominio/diagramaDeEstado.jpg)
+![Diagrama de estados](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/250c393e3611c2fde5518c48d699a0797d3a06d9/docs/scenariosView/ModeloDedominio/diagramaDeEstado.jpg)
 
 ## Modelo de Casos de Uso
 
