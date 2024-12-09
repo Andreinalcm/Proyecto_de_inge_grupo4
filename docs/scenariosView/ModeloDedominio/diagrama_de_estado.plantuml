@@ -1,46 +1,113 @@
-@startuml Diagrama de estados
+@startuml Diagrama_de_subestados
 
 hide empty description
 
 ' Estado inicial
-[*] --> Registro : Usuario se registra
+state decision <<choice>>
+[*] --> decision
+decision --> Registrando : Registrar Usuario
+state Registrando {
+    [*] --> CompletandoDatos : Completar datos
+    CompletandoDatos --> VerificandoCorreo : Verificar correo electrónico
+    VerificandoCorreo --> Confirmado : Confirmar cuenta
+    Confirmado --> [*]
+}
 
-' Estados del Usuario
-Registro --> UsuarioInactivo : Usuario registrado pero no activo
-UsuarioInactivo --> UsuarioActivo : Activar cuenta
-UsuarioActivo --> UsuarioSuspendido : Cuenta suspendida por violación de reglas
-UsuarioSuspendido --> UsuarioActivo : Reactivar cuenta
-UsuarioActivo --> [*]
-UsuarioActivo --> Usuario_Sesión_Iniciada : Iniciar sesión
-Usuario_Sesión_Iniciada --> [*] : Cerrar Sesión
-[*] --> Usuario_Sesión_Iniciada : Iniciar sesión
+' Subestados del Usuario
 
-' Estados del Evento
-[*] --> CreacionEvento : Crear evento
-CreacionEvento --> EventoBorrador : Guardar como borrador
-EventoBorrador --> Publicado : Publicar evento
-Publicado --> Modificado: Modificar evento
-Modificado --> Archivado: Archivar evento
-Publicado --> Archivado : Archivar evento
-EventoBorrador --> Cancelado : Cancelar evento
-Cancelado --> [*]
-Archivado --> [*]
+decision --> IniciandoSesion : Iniciar sesión
+state IniciandoSesion {
 
-' Estados del Comentario
-[*] --> CreacionComentario : Crear comentario
-CreacionComentario --> ComentarioPublicado : Publicar comentario
-ComentarioPublicado --> ComentarioEliminado : Eliminar comentario
-ComentarioPublicado --> [*]
-ComentarioEliminado --> [*]
+    UsuarioInactivo --> UsuarioActivo : Activar cuenta
+    UsuarioActivo --> UsuarioSuspendido : Cuenta suspendida por violación de reglas
+    UsuarioSuspendido --> UsuarioActivo : Reactivar cuenta
+    UsuarioActivo --> Sesión_Iniciada : Iniciar sesión
+    Sesión_Iniciada --> [*]
+}
 
-' Estados de las Notificaciones
-state EstadoNotificacion <<choice>>
-[*] --> CreacionNotificacion : Crear
-CreacionNotificacion --> NotificacionEnviada : enviar notificación
-NotificacionEnviada --> EstadoNotificacion
-EstadoNotificacion --> Leida : [marcar como leída]
-EstadoNotificacion --> Borrada : [borrar]
-Leida --> Borrada
-Borrada --> [*]
+' Estado inicial del Evento
+IniciandoSesion --> publicandoEvento : Publicar evento
+Registrando --> IniciandoSesion: Iniciar sesión
+
+' Subestados del Evento
+state publicandoEvento {
+    [*] --> CreacionEvento : Crear evento
+    state RevisandoEvento{
+        [*] --> RevisionEvento
+RevisionEvento --> AprobandoEvento  
+RevisionEvento --> RechazandoEvento  
+    }
+    state EventoBorrador <<choice>>
+    state decision2 <<choice>>
+    CreacionEvento --> EventoBorrador : Guardar como borrador
+    EventoBorrador --> RevisandoEvento : Publicar evento
+    AprobandoEvento --> EventoPublicado : Aprobar evento
+    EventoBorrador --> EventoCancelado : Cancelar evento
+    EventoCancelado --> [*]
+    EventoModificado --> [*]
+    EventoPublicado --> decision2
+    decision2 --> EventoModificado: Modificar Evento               
+    decision2 --> [*]               
+}
+
+' Estado inicial del Comentario
+IniciandoSesion --> RealizandoComentario : Realizar comentario
+
+' Subestados del Comentario
+state RealizandoComentario {
+    [*] --> CreacionComentario : Crear comentario
+    CreacionComentario --> ComentarioPublicado : Publicar comentario
+    ComentarioPublicado --> ComentarioEliminado : Eliminar comentario
+    ComentarioPublicado --> [*]
+    ComentarioEliminado --> [*]
+}
+
+' Estado inicial de las Notificaciones
+IniciandoSesion --> GenerandoNotificacion : Generar Notificaciones
+'Estado Haciendo Publicación
+IniciandoSesion --> HaciendoPublicacion: Hacer Publicación
+state HaciendoPublicacion{
+     [*] --> CreandoPublicacion : Crear Publicación
+    CreandoPublicacion --> RevisandoPublicacion : Verificar Publicación
+    state RevisandoPublicacion{
+state RevisionPublicacion <<choice>>
+[*] --> RevisionPublicacion
+RevisionPublicacion --> AprobandoPublicacion  
+RevisionPublicacion --> RechazandoPublicacion  
+    }
+
+    AprobandoPublicacion --> PublicacionCreada : Aprobar Publicación
+   state decision3 <<choice>>
+   
+    CreandoPublicacion --> PublicacionCancelada : Cancelar Publicación
+    PublicacionCancelada --> [*]
+    PublicacionCreada --> decision3
+    decision3 --> PublicacionModificada: Modificar Publicación
+    decision3 --> [*]
+
+    PublicacionModificada --> [*]
+   
+}
+' Subestados de las Notificaciones
+state GenerandoNotificacion {
+    [*] --> CreacionNotificacion : Crear notificación
+    CreacionNotificacion --> NotificacionEnviada : Enviar notificación
+    NotificacionEnviada --> EstadoNotificacion : Estado de notificación
+    state EstadoNotificacion <<choice>> {
+        [*] --> Leida : Marcar como leída
+        [*] --> Borrada : Borrar
+        Leida --> Borrada
+        Borrada --> [*]
+    }
+}
+state CerrandoSesion 
+HaciendoPublicacion --> CerrandoSesion: Cerrar sesión
+GenerandoNotificacion --> CerrandoSesion: Cerrar sesión
+IniciandoSesion --> CerrandoSesion: Cerrar sesión
+RealizandoComentario --> CerrandoSesion: Cerrar sesión
+publicandoEvento --> CerrandoSesion: Cerrar sesión
+
+CerrandoSesion -->[*]
 
 @enduml
+
