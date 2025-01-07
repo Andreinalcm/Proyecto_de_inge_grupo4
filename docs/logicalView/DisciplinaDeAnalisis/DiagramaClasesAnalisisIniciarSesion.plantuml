@@ -1,0 +1,17 @@
+@startuml UC2 Iniciar sesión
+
+left to right direction
+
+Actor ":Usuario" as u
+
+entity ":Sesión de usuario" as sesion
+
+control ":Gestor de inicio de sesión" as gestor
+
+boundary ":Formulario de inicio de sesión" as reg
+
+u -- reg
+reg -- gestor
+gestor -- sesion
+
+@enduml
