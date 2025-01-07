@@ -1,0 +1,27 @@
+@startuml UC7 Hacer una publicación
+
+left to right direction
+
+Actor ":Profesor" as profe
+Actor ":Personal de apoyo" as pa
+Actor ":Moderador" as moderador
+
+boundary ":Formulario de datos de la publicación" as form
+control ":Gestor de publicaciones" as gestor
+control ":Gestor de aprobación de publicación" as gestorP
+entity ":Publicación" as p
+entity ":Calendario" as c
+entity ":Moderador" as mod
+boundary ":Solicitud de publicación" as soli
+
+profe -- form : -->\n//1: IngresarDatosPublicacion()//
+pa -- form: -->\n//1: IngresarDatosPublicacion()//
+moderador -- form: -->\n//1: IngresarDatosPublicacion()//
+form -- gestor : -->\n//2: EnviarDatosPublicacion()// \n <--\n//11: Respuesta()// 
+gestor -- p: -->\n //9: HacerPublicación()//
+gestor -- c: -->\n //10: AgregarAlCalendario()// 
+gestor -- soli: -->\n//3: EnviarDatosPublicacion()// \n <--\n//8: Respuesta()// 
+soli -- gestorP: -->\n//4: EnviarSolicitud()// \n <--\n//7: Respuesta()// 
+gestorP -- mod: -->\n//5: EnviarSolicitud()// \n <--\n//6: Respuesta()// 
+
+@enduml
