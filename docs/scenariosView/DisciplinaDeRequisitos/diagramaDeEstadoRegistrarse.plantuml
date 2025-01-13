@@ -2,13 +2,11 @@
 
 hide empty description
 
-state RegistrarUsuario{
-    [*] --> EsperandoDatos
-    EsperandoDatos --> ValidandoDatos : Usuario ingresa datos
-    ValidandoDatos --> UsuarioRegistrado : Datos válidos
-    ValidandoDatos --> ErrorValidacion : Datos inválidos
-    ErrorValidacion --> EsperandoDatos : Reintentar
-    UsuarioRegistrado --> [*] : Registro exitoso
-}
+[*] --> EsperandoDatos
+EsperandoDatos --> ValidandoDatos : Usuario ingresa datos
+ValidandoDatos --> UsuarioRegistrado : Datos válidos
+ValidandoDatos --> ErrorValidacion : Datos inválidos
+ErrorValidacion --> EsperandoDatos : Reintentar
+UsuarioRegistrado --> [*] : Registro exitoso
 
 @enduml

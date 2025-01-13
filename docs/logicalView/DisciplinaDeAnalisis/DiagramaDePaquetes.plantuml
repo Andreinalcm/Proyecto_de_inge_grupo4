@@ -1,0 +1,64 @@
+@startuml Diagrama de Paquetes
+
+left to right direction
+
+package "GestiondePublicaciones" {
+usecase "UC7 - Hacer una Publicacion" as UC7
+usecase "UC8 - Descartar Publicacion" as UC8
+usecase "UC9 - Eliminar publicacion" as UC9
+}
+
+package "GestionBasicaUsuario" {
+usecase "UC1 - Registrar usuario" as UC1
+usecase "UC2 - Iniciar sesin" as UC2
+usecase "UC13 - Revisar Calendario" as UC13
+usecase "UC15 - Editar Perfil" as UC15
+usecase "UC16 - Cerrar Sesión" as UC16
+}
+
+package "GestiondeModeracion" {
+usecase "UC17 - Revisar Publicacion o Evento" as UC17
+usecase "UC18 - Aprobar Publicacion o Evento" as UC18
+usecase "UC19 - Rechazar Publicacion o Evento" as UC19
+}
+
+package "GestiondeComentarios" {
+usecase "UC11 - Comentar publicacion o evento" as UC11
+usecase "UC12 - Eliminar Comentario" as UC12
+}
+
+package "GestionEventos" {
+    usecase "UC3 - Publicar evento" as UC3
+    usecase "UC4 - Descartar Evento" as UC4
+    usecase "UC5 - Modificar Evento" as UC5
+    usecase "UC6 - Eliminar Evento" as UC6
+    usecase "UC14 - Añadir Evento" as UC14
+}
+
+GestionEventos ..> GestionBasicaUsuario
+GestiondePublicaciones ..> GestiondeModeracion
+GestiondePublicaciones ..> GestiondeComentarios
+GestionEventos ..> GestiondeModeracion
+GestionEventos ..>GestiondeComentarios
+
+UC14 <-> UC3 
+UC3 <-> UC5 
+UC3 <-> UC4 
+UC3 <-> UC6
+
+UC11 <-> UC12
+
+UC17 <-> UC18
+UC17 <-> UC19
+
+UC7 <-> UC8
+UC8 <-> UC9
+UC9 <-> UC7
+
+UC1 <-> UC2
+UC2 <-> UC16
+UC13 <-> UC15
+UC2 <-> UC13
+UC2 <-> UC15
+
+@enduml
