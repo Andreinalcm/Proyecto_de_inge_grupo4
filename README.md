@@ -11,11 +11,11 @@
 
 ### Diagrama de clases
 
-![Diagrama de clases](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/250c393e3611c2fde5518c48d699a0797d3a06d9/docs/scenariosView/ModeloDeDominio/diagrama_de_clases.jpg)
+![Diagrama de clases](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/08c690db2ec8c6531892bcbe884d72a52db7cb4d/docs/scenariosView/ModeloDedominio/diagrama_de_clases.jpg)
 
 ### Diagrama de estados
 
-![Diagrama de estados](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/250c393e3611c2fde5518c48d699a0797d3a06d9/docs/scenariosView/ModeloDeDominio/diagramaDeEstado.jpg)
+![Diagrama de estados](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/08c690db2ec8c6531892bcbe884d72a52db7cb4d/docs/scenariosView/ModeloDedominio/diagramaDeEstado.jpg)
 
 ## Modelo de Casos de Uso
 
@@ -29,7 +29,7 @@
 
 ### Diagrama de relación de los casos de uso
 
-![Relacion moderador](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/232cb432e64c4709d000a9bed92d00970ae84f64/docs/scenariosView/DisciplinaDeRequisitos/relacionModerador.jpg)
+![Relacion moderador](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/08c690db2ec8c6531892bcbe884d72a52db7cb4d/docs/scenariosView/DisciplinaDeRequisitos/diagramaDeEstadoDeRelacion.png)
 
 ### Prototipo de Interfaz
 
