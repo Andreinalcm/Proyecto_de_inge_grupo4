@@ -1,5 +1,7 @@
 # VirtualCiencias
 
+### Integrantes
+
 1. Andreina Lacruz
 2. Angelo Alfonzo
 3. Eduard Cañizales
@@ -7,7 +9,7 @@
 5. Luis Tortoza
 6. Manuel Briceño
 
-## Modelo del Dominio
+## Modelo del dominio
 
 ### Diagrama de clases
 
@@ -17,7 +19,7 @@
 
 ![Diagrama de estados](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/08c690db2ec8c6531892bcbe884d72a52db7cb4d/docs/scenariosView/ModeloDedominio/diagramaDeEstado.jpg)
 
-## Modelo de Casos de Uso
+## Modelo de casos de uso
 
 ### Diagrama de casos de uso
 
@@ -31,6 +33,14 @@
 
 ![Relacion moderador](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/08c690db2ec8c6531892bcbe884d72a52db7cb4d/docs/scenariosView/DisciplinaDeRequisitos/diagramaDeEstadoDeRelacion.png)
 
-### Prototipo de Interfaz
+### Prototipo de interfaz
 
 ![Prototipo de Interfaz](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/4def01a5c68bcc08acdbd3900856784e96c36145/docs/scenariosView/DisciplinaDeRequisitos/Prototipo_de_interfaz.png)
+
+## Disciplina de análisis
+
+![Prototipo de Interfaz]()
+
+## Disciplina de diseño
+
+![Prototipo de Interfaz]()

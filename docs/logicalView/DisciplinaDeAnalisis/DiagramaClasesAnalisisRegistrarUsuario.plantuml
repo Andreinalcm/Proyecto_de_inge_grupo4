@@ -4,10 +4,14 @@ left to right direction
 
 Actor ":Usuario" as usuario
 
-control ":Gestor de lista de usuarios" as gestor
-boundary ":Formulario de registro de usuario" as reg
+boundary ":FormularioDeRegistro" as reg
+control ":GestorDeUsuarios" as gestor
 entity ":Usuario" as user
+boundary ":FormularioDeInicioDeSesión" as log
 
 usuario -- reg
 reg -- gestor
 gestor -- user
+gestor--log
+
+@enduml
