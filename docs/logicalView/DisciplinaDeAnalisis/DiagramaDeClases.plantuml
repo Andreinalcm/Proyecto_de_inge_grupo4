@@ -1,135 +1,137 @@
-@startuml Diagrama de clases de análisis
+@startuml Diagrama de Clases de Análisis
 
-class "SesiónDeUsuario" as SU {
-    +InicioExitoso() : boolean
+class "FormularioDeInicioDeSesion" as FIS {
++ EnviarDatosUsuario() : Usuario
 }
-class "Usuario" as user {
-    +nombre : string
-    +usuario : string
-    -correo : string
-    -clave : string
-
-    +IngresarDatosUsuario(string nombre, string usuario, string correo, string clave) : void
-    +IngresarDatosUsuario(string usuario, string clave) : void
-    +IngresarDatosEvento(string titulo, DataTime fecha_inicio, DataTime fecha_fin, string categoria, string descripcion) : void
-}
-
-class "FormularioDeRegistroDeUsuario" as FRU {
-    EnviarDatosUsuario(string nombre, string correo, string clave) : void
-}
-
-class "GestorDeListaDeUsuarios" as GLU {
-    +CrearUsuario(string nombre, string correo, string clave) : Usuario
-    +ValidarDatos(): boolean
-}
-
-class "FormularioDeInicioDeSesión" as FIS {
-    +enviarDatosUsuario(string usuario, string clave) : void
-}
-
 class "GestorDeInicioDeSesion" as GIS {
-    +VerificarDatos(string usuario, string clave) : void
-    +InicioExitoso() : boolean
++ VerificarDatos() : void
++ MostrarDashboard() : void
++ InicioExitoso() : void
 }
 
-class "Evento" as event {
-     +titulo : string
-     +fecha_inicio : DataTime
-     +fecha_fin : DataTime
-     +categoria : string
-     +descripcion : string
+class "Dashboard" as DASH
+class "Usuario" as USU{
+-nombre : string
+-usuario : string
+-correo : string
+-clave : string
+
++ RegistroExitoso() : boolean
 }
 
-class "Calendario" as Cal {
-    ListaDeEventos : List<Eventos> 
-    ListaDePublicacion : List<Publicacion> 
-    Dia : List<Dia> 
-    Meses : List<Meses> 
-    Anios : List<Anios>
+class "FormularioDeRegistro" as FDR {
+EnviarDatosUsuario() : Usuario
 }
 
-class "Moderador" as mod {
-     +IngresarDatosPublicacion(string titulo, DataTime Fecha_Publicaion, string categoria, string descripcion) : void
-    +Respuesta() : boolean
+class "GestorDeUsuarios" as GDU {
++ ValidarDatos() : void
++ CrearUsuario() : Usuario
++ RegistroExitoso() : boolean
++ MostrarInicioDeSesion() : void
++ InicioExitoso() : void
++ObtenerUsuario(): Usuario
 }
 
-class "FormularioDeDatosDelEvento" as FDE {
-    +EnviarDatosEvento(string titulo, DataTime fecha_inicio, DataTime fecha_fin, string categoria, string descripcion) : void
+class "VistaCalendario" as VC {
++ObtenerCalendario(): Calendario
 }
 
-class "GestorDeEventos" as GE {
-    +EnviarDatosEvento(string titulo, DataTime fecha_inicio, DataTime fecha_fin, string categoria, string descripcion) : void
-    +AgregarAlCalendario(Evento evento) : void
-    +PublicarEvento(string titulo, DataTime fecha_inicio, DataTime fecha_fin, string categoria, string descripcion) : Evento  
+class "GestorDeCalendario" as GDC {
++ObtenerCalendario(): Calendario
++MandarCalendario(): Calendariio
 }
-
-class "SolicitudDeEvento" as SE {
-     +EnviarSolicitud() : void
-     +Respuesta() : boolean
-
-}
-class "GestorDeAprobaciónDeEvento" as GAE {
-     +EnviarSolicitud() : void
-     +Respuesta(): boolean
-
+class "GestorDeEventos" as GDE {
++ObtenerEventos(): List<Evento>
++EntregarEvento(): List<Evento>
 }
 
 
-class "GestorDePublicación" as GP {
-   +HacerPublicacion(string titulo, DataTime Fecha_Publicaion, string categoria, string descripcion) : Publicacion
-   +AgregarCalendario(Publicacion publicacion) : void
-   +EnviarDatosPublicacion(string titulo, DataTime Fecha_Publicaion, string categoria, string descripcion) : void
+class "Calendario" as C {
+-ListaDeEventos : List<Evento> 
+-ListaDePublicacion : List<Publicacion> 
+-Dia : List<Dia> 
+-Meses : List<Meses> 
+-Anios : List<Anios>
++ObtenerListaEventos(): List<Evento>
++EntregarCalendario(): Calendario
 }
 
-class "FormularioDeDatosDeLaPublicación" as FDP {
-    +EnviarDatosPublicacion(string titulo, DataTime Fecha_Publicaion, string categoria, string descripcion) : void
-}
-class "Profesor" as prof {
-     +IngresarDatosPublicacion(string titulo, DataTime Fecha_Publicaion, string categoria, string descripcion) : void
-}
-class "PersonalDeApoyo" as apoyo {
-     +IngresarDatosPublicacion(string titulo, DataTime Fecha_Publicaion, string categoria, string descripcion) : void
-}
-class "SolicitudDePublicación" as SP {
-    EnviarSolicitud() : void
-    Respuesta() : boolean
-}
-class "GestorDeAprobaciónDePublicación" as GAP {
-     EnviarSolicitud() : void
-     Respuesta() : boolean
+class "Evento" as E{
+-titulo : string
+-fecha_inicio : DataTime
+-fecha_fin : DataTime
+-categoria : string
+-descripcion : string
++EventoCreado(): boolean
++EntregarEventos(): List<Evento>
 }
 
-class "Publicación" as publi
+class "FormularioDeEventos" as FDE {
++EnviarDatosEnvento(): Evento
+}
+class "GestorDeEventos" as GDE {
++CrearEvento(): Evento
++AniadirACalendario(): void
 
-'Registro'
-user  --> FRU 
-FRU  --> GLU
-'Inicio de Sesión'
-user --> FIS
-FIS --> GIS
-GIS --> SU
-'Publicar un Evento'
-user -left-> FDE
-FDE --> GE
-GE -down-> event
-GE --> Cal
-GE --> SE
-SE --> GAE
-GAE --> mod
-user <|- mod
-'Hacer una Publicacion'
-prof --> FDP
-mod --> FDP
-apoyo --> FDP
-FDP --> GP
-GP --> SP
-GP --> Cal
-GP --> publi
-SP --> GAP 
-GAP --> mod
+}
+
+class "FormularioDePublicacion" as FDP {
++ EnviarDatosPublicacion(): Publicacion
+}
+class "GestorDePublicaciones" as GDP {
++ CrearPublicacion()
+}
+class "Publicacion" as P {
+PublicacionCreada(): void
+}
 
 
-user <|-- prof
-user <|-- apoyo
+class "VistaDeEvento" as VDE{
++CambiarEstado(): void
+}
+
+class "VistaDePublicacion" as VDP{
++CambiarEstado(): void
+}
+
+
+class "GestorDeRevision" as GDR{
++EventoAprobado():  void
++PublicacionAprobada():  void
+}
+
+
+GDU "1" -- "*" USU
+FDR "*" --> "1" GDU
+
+
+FIS "*" --> "1" GIS
+GIS "1" -- "*" USU
+GIS "1" --> "1" DASH
+FIS "*" --> "1" GDU
+
+FDE "*" --> "1" GDE
+GDE "1" -- "*" E
+GDE "1" --> "*" C
+C "1" --> "1" GDC
+
+FDP "*" --> "1" GDP
+P "*" -- "1" GDP
+
+VC "*" --> "1" GDC
+
+
+GDR "1" -- "*" P
+GDR "1" --> "*" E
+
+VDE "*" --> "1" GDR
+VDP "*" -- "1" GDR
+
+DASH "1" -- "1" FDP
+DASH "1" -- "1" FDE
+DASH "1" -- "1" VC
+
+
+
 
 @enduml

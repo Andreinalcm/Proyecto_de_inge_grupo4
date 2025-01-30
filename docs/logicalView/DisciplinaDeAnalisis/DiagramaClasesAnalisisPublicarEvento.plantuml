@@ -1,24 +1,19 @@
-
 @startuml UC3 Publicar evento
 
 left to right direction
 
 Actor ":Usuario" as u
 
-boundary ":Formulario de datos del evento" as form
-control ":Gestor de eventos" as gestor
-control ":Gestor de aprobación de evento" as gestorEvento
+boundary ":FormularioDeEventos" as form
+control ":GestorDeEventos" as gestor
+
 entity ":Evento" as event 
 entity ":Calendario" as c
-entity ":Moderador" as mod
-boundary ":Solicitud de evento" as soli
 
 u-- form
-form -- gestor
+form -- gestor 
 gestor -- event
 gestor -- c
-gestor -- soli
-soli -- gestorEvento
-gestorEvento -- mod
+
 
 @enduml

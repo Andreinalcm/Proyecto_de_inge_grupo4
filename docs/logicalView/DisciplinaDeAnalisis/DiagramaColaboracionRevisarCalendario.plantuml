@@ -1,0 +1,20 @@
+@startuml UC13 Revisar Calendario
+left to right direction
+
+Actor " :Usuario" as user
+
+boundary " :VistaCalendario" as IC
+
+control " :GestorDeCalendario" as CC
+
+entity " :Calendario" as C
+entity " :Evento" as E 
+control ":GestorDeEventos" as GE
+user -- IC: "1. VerCalendario() \n -> \n 10.MostrarCalendario() \n <-"
+IC -- CC: "2. ObtenerCalendario() \n -> \n 9.MandarCalendario() \n <-"
+CC -- C: "3. ObtenerCalendario() \n -> \n 8.EntregarCalendario() \n <-"
+
+GE -- E : "5. ObtenerEventos() \n -> \n 6.EntregarEventos() \n <-"
+C -- GE: "4. ObtenerListaEventos() \n -> \n 7.EntregarListaDeEventos() \n <-"
+
+@enduml

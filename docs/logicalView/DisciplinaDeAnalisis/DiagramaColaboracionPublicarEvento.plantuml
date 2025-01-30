@@ -4,20 +4,16 @@ left to right direction
 
 Actor ":Usuario" as u
 
-boundary ":Formulario de datos del evento" as form
-control ":Gestor de eventos" as gestor
-control ":Gestor de aprobación de evento" as gestorEvento
+boundary ":FormularioDeEventos" as form
+control ":GestorDeEventos" as gestor
+
 entity ":Evento" as event 
 entity ":Calendario" as c
-entity ":Moderador" as mod
-boundary ":Solicitud de evento" as soli
 
-u--- form : -->\n//1: IngresarDatosEvento()//
-form --- gestor : -->\n//2: EnviarDatosEvento()//
-gestor --- event: -->\n //8: PublicarEvento()//
-gestor --- c: -->\n //9: AgregarAlCalendario()// 
-gestor --- soli: -->\n//3: EnviarDatosEvento()// \n <--\n//8: Respuesta()// 
-soli --- gestorEvento: -->\n//4: EnviarSolicitud()// \n <--\n//7: Respuesta()// 
-gestorEvento -- mod: -->\n//5: EnviarSolicitud()// \n <--\n//6: Respuesta()// 
+u-- form: "1.IngresarDatosEventos() \n ->"
+form -- gestor : "2.EnviarDatosEvento() \n ->"
+gestor -- event: "3.CrearEvento() \n -> \n 4.EventoCreado() \n <-"
+gestor -- c: "5. AñadirACalendario() \n ->"
+
 
 @enduml
