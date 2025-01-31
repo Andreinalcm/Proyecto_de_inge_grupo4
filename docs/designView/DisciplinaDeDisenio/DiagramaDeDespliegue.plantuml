@@ -1,0 +1,35 @@
+@startuml Diagrama de secuencia UC3 Publicar un evento
+
+left to right direction
+
+node VirtualCiencias as P{
+    node GestionDeEventos
+    node GestionDeUsuario
+    node GestionDePublicaciones
+    node GestionDeRevision
+    node GestionDeCalendario
+}
+
+node Cliente as C {
+node Moderador
+node "Personal de apoyo"
+node Estudiante
+node Profesor
+}
+
+node "Servidor de base de datos" as BD
+
+artifact "VirtualCiencias.txt" <<artifact>> as VC
+
+node "Cliente Web" as CW
+
+component VirtualCiencia.java <<component>> as main
+
+CW --|> C
+C  -up-  P: "HTTP"
+BD --- P 
+VC --* BD : "<<use>>"
+main  ---* P : "<<use>>"
+
+
+@enduml

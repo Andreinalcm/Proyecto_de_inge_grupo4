@@ -1,20 +1,43 @@
-@startuml UC13 Revisar Calendario
+@startuml UC3 Publicar evento Traza
+
 left to right direction
 
-Actor " :Usuario" as user
+Actor "Usuario" as u
+Actor "Usuario" as user
+package "DisenioVista"{
+agent FormularioDeEventos as DFE
 
-boundary " :VistaCalendario" as IC
+}
 
-control " :GestorDeCalendario" as CC
+package "DisenioBack"{
+    agent GestorDeEventos as DGE
+    agent  ": Evento" as devent 
+    agent "Calendario" as dcal
+    DGE -- devent
+    DGE -- dcal
+    DFE -- DGE
+}
 
-entity " :Calendario" as C
-entity " :Evento" as E 
-control ":GestorDeEventos" as GE
-user -- IC
-IC -- CC
-CC -- C 
+package Analisis{
 
-GE - E 
-C - GE
+Actor ":Usuario" as u
+
+boundary ":FormularioDeEventos" as form
+control ":GestorDeEventos" as gestor
+
+entity ":Evento" as event 
+entity ":Calendario" as c
+
+  u-- form
+form -- gestor 
+gestor -- event
+gestor -- c
+}
+
+user -- DFE
+form ....> DFE: traza
+gestor ....> DGE: traza
+event ....> devent: traza
+c ....> dcal: traza
 
 @enduml
