@@ -1,16 +1,17 @@
-@startuml UC3 Publicar evento Traza
+@startuml Diagrama de secuencia UC3 Publicar un evento
 
 left to right direction
 
-Actor ":Usuario" as u
+Actor "Usuario" as u
+Actor "Usuario" as user
 package "DisenioVista"{
 agent FormularioDeEventos as DFE
 
 }
-u -- DFE
+
 package "DisenioBack"{
     agent GestorDeEventos as DGE
-    agent  ": Evento" as devent 
+    agent  "Evento" as devent 
     agent "Calendario" as dcal
     DGE -- devent
     DGE -- dcal
@@ -19,23 +20,24 @@ package "DisenioBack"{
 
 package Analisis{
 
-Actor ":Usuario" as u
+Actor "Usuario" as u
 
-boundary ":FormularioDeEventos" as form
-control ":GestorDeEventos" as gestor
+boundary "FormularioDeEventos" as form
+control "GestorDeEventos" as gestor
 
-entity ":Evento" as event 
-entity ":Calendario" as c
+entity "Evento" as event 
+entity "Calendario" as c
 
-  u-- form: "1.IngresarDatosEventos() \n ->"
-form -- gestor : "2.EnviarDatosEvento() \n ->"
-gestor -- event: "3.CrearEvento() \n -> \n 4.EventoCreado() \n <-"
-gestor -- c: "5. AniadirACalendario() \n ->"
-
+  u-- form
+form -- gestor 
+gestor -- event
+gestor -- c
 }
-form <.. DFE
-gestor <.. DGE
-event <.. devent
-c <.. dcal
+
+user -- DFE
+form ....> DFE: traza
+gestor ....> DGE: traza
+event ....> devent: traza
+c ....> dcal: traza
 
 @enduml

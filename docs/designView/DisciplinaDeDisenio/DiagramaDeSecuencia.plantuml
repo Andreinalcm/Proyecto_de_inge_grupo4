@@ -1,0 +1,34 @@
+@startuml Diagrama de secuencia UC3 Publicar un evento
+actor Usuario
+
+participant ":FormularioDeEventos" as form
+participant ":GestorDeEventos" as gestor
+participant ":Evento" as event
+participant ":Calendario" as cal
+
+Usuario -> form : 1.IngresarDatosEventos(titulo, fecha_inicio, fecha_fin, categoria, descripcion)
+activate form 
+form -> gestor : 2.EnviarDatosEvento(titulo, fecha_inicio, fecha_fin, categoria, descripcion)
+deactivate form 
+activate gestor 
+gestor -> event : 3.CrearEvento(titulo, fecha_inicio, fecha_fin, categoria, descripcion)
+deactivate gestor
+activate event 
+
+event -> event : 4.EventoCreado()
+activate event
+deactivate event
+gestor <- event : 5.Retorna evento creado
+
+activate gestor
+deactivate event
+gestor -> cal : 6.AniadirACalendario(evento)
+activate cal
+activate cal
+cal -> cal : 7.Agregar evento a la lista de eventos
+gestor <- cal : 8.Confirmación de adición
+deactivate cal
+deactivate cal
+deactivate gestor
+
+@enduml
