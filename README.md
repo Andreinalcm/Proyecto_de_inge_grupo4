@@ -39,8 +39,8 @@
 
 ## Disciplina de análisis
 
-![Prototipo de Interfaz]()
+![Diagrama de paquetes](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/addefc00db6aaf58374a15c4b205f039b101fc6b/docs/logicalView/DisciplinaDeAnalisis/DiagramaDePaquetes.png)
 
 ## Disciplina de diseño
 
-![Prototipo de Interfaz]()
+![Diagrama de despliegue](https://github.com/Andreinalcm/Proyecto_de_inge_grupo4/blob/addefc00db6aaf58374a15c4b205f039b101fc6b/docs/designView/DisciplinaDeDisenio/DiagramaDeDespliegue.png)
