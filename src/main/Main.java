@@ -1,5 +1,9 @@
 package main;
+
 import javax.swing.*;
+
+import main.Controller.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.time.LocalDateTime;
@@ -8,7 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import main.Controller.GestionDeEventos.GestorDeEventos; //No deberia dar error
+
+import main.Controller.GestionDeEventos.GestorDeEventos;
+import main.Controller.GestionDeEventos.RepositorioEventosMemoria;
 import main.View.GestionDeEventos.RepositorioEventos;
 import main.View.GestionDeEventos.GestionEventos;
 import main.Model.GestionDeEventos.Evento;

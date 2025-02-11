@@ -1,4 +1,4 @@
-package main.Controller.GestionDeEventos; // No debria dar error
+package main.Controller.GestionDeEventos;
 import javax.swing.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
