@@ -1,0 +1,38 @@
+@startuml Diagrama de traza UC1 Registrar usuario
+
+left to right direction
+
+Actor ":Usuario" as u
+Actor ":Usuario" as user
+
+agent FormularioDeRegistro as DFE
+
+    agent GestorDeUsuarios as DGE
+    agent  "Usuario" as devent 
+    agent "FormularioDeInicioDeSesion" as dcal
+    DGE -- devent
+    DGE -- dcal
+    DFE -- DGE
+
+
+Actor ":Usuario" as u
+
+boundary ":FormularioDeRegistro" as form
+control ":GestorDeUsuarios" as gestor
+
+entity ":Usuario" as event 
+boundary ":FormularioDeInicioDeSesion" as FDS
+
+  u-- form
+form -- gestor 
+gestor -- event
+gestor -- FDS
+
+
+user -- DFE
+form ....> DFE: traza
+gestor ....> DGE: traza
+event ....> devent: traza
+FDS ....> dcal: traza
+
+@enduml
