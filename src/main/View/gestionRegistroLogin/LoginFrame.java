@@ -1,10 +1,12 @@
+package main.View.gestionRegistroLogin;
+
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
 
 // Ventana de Inicio de Sesión
-class LoginFrame extends JFrame {
+public class LoginFrame extends JFrame {
     public LoginFrame() {
         // Configuración de la ventana
         setTitle("Inicio de Sesión (3D, Blanco y Negro)");

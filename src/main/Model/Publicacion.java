@@ -1,4 +1,4 @@
-package main.Entidad;
+package main.model;
 
 //Librerias
 import java.util.ArrayList;
