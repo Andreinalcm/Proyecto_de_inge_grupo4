@@ -1,6 +1,6 @@
-package main.View.GestionDePublicaciones;
+package main.View.gestionDePublicaciones;
 
-import main.Controller.GestorPublicaciones.GestorPublicaciones;
+import main.Controller.gestorPublicaciones.GestorPublicaciones;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;

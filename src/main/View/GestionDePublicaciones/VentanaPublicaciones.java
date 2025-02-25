@@ -1,9 +1,9 @@
-package main.View.GestionDePublicaciones;
+package main.View.gestionDePublicaciones;
 
 //Paquetes importados
 //import main.Entidad.Publicacion;
-import main.Controller.GestorPublicaciones.GestorPublicaciones;
-import main.model.Publicacion;
+import main.Controller.gestorPublicaciones.GestorPublicaciones;
+import main.Model.gestionPublicacion.Publicacion;
 
 
 //Librerias

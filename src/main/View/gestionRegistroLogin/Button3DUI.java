@@ -1,14 +1,13 @@
 package main.View.gestionRegistroLogin;
-
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
+import java.util.*;
 
-/**
- * Clase para aplicar estilo 3D a los botones.
- */
-class Button3DUI extends javax.swing.plaf.basic.BasicButtonUI {
+// =================== Clase para estilo 3D en botones ===================
+public class Button3DUI extends javax.swing.plaf.basic.BasicButtonUI {
     @Override
     public void installUI(JComponent c) {
         super.installUI(c);

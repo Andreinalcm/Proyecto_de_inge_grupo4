@@ -1,12 +1,15 @@
 package main.View.gestionRegistroLogin;
-
+import main.Controller.gestorRegistroLogin.LoginRegisterApp;
+// LoginRegisterApp.java
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
+import java.util.*;
 
-// Ventana de Registro
-class RegisterFrame extends JFrame {
+// =================== Ventana de Registro ===================
+public class RegisterFrame extends JFrame {
     public RegisterFrame() {
         // Configuración de la ventana
         setTitle("Registro de Usuario (3D, Blanco y Negro)");
@@ -29,7 +32,7 @@ class RegisterFrame extends JFrame {
         JPanel centerPanel = new JPanel(new GridLayout(4, 2, 5, 5));
         centerPanel.setBackground(Color.DARK_GRAY);
         centerPanel.setBorder(BorderFactory.createCompoundBorder(
-                new BevelBorder(BevelBorder.RAISED, Color.WHITE, Color.GRAY), 
+                new BevelBorder(BevelBorder.RAISED, Color.WHITE, Color.GRAY),
                 new EmptyBorder(10, 10, 10, 10)
         ));
 
@@ -89,8 +92,30 @@ class RegisterFrame extends JFrame {
             new LoginFrame();
         });
 
-        // Agregar componentes al panel principal
-        buttonPanel.add(backButton);
+        // Evento para registrar al usuario
+        registerButton.addActionListener(e -> {
+            String usuario = userField.getText().trim();
+            String nombre = nameField.getText().trim();
+            String correo = emailField.getText().trim();
+            String clave = new String(passField.getPassword()).trim();
+
+            if (usuario.isEmpty() || nombre.isEmpty() || correo.isEmpty() || clave.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Complete todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            Map<String, String[]> usuarios = LoginRegisterApp.leerUsuarios();
+            if (usuarios.containsKey(usuario)) {
+                JOptionPane.showMessageDialog(this, "El usuario ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                LoginRegisterApp.guardarUsuario(usuario, nombre, correo, clave);
+                JOptionPane.showMessageDialog(this, "Registro exitoso. Ahora puede iniciar sesión.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+                new LoginFrame();
+            }
+        });
+
+        //buttonPanel.add(backButton);
         buttonPanel.add(registerButton);
 
         mainPanel.add(titleLabel, BorderLayout.NORTH);

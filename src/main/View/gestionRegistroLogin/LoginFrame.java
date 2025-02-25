@@ -1,16 +1,19 @@
 package main.View.gestionRegistroLogin;
-
+import main.Controller.gestorRegistroLogin.LoginRegisterApp;
+// LoginRegisterApp.java
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
+import java.util.*;
 
-// Ventana de Inicio de Sesión
+// =================== Ventana de Inicio de Sesión ===================
 public class LoginFrame extends JFrame {
     public LoginFrame() {
         // Configuración de la ventana
         setTitle("Inicio de Sesión (3D, Blanco y Negro)");
-        setSize(350, 250);
+        setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -65,14 +68,41 @@ public class LoginFrame extends JFrame {
         ButtonUtils.styleButton3D(backButton);
         ButtonUtils.styleButton3D(registerButton);
 
+        // Evento para iniciar sesión
+        JButton loginButton = new JButton("Iniciar Sesión");
+        ButtonUtils.styleButton3D(loginButton);
+        loginButton.addActionListener(e -> {
+            String usuario = userField.getText().trim();
+            String clave = new String(passField.getPassword()).trim();
+
+            if (usuario.isEmpty() || clave.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Ingrese usuario y clave.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            Map<String, String[]> usuarios = LoginRegisterApp.leerUsuarios();
+            if (usuarios.containsKey(usuario)) {
+                String[] datos = usuarios.get(usuario);
+                String claveRegistrada = datos[2];
+                if (claveRegistrada.equals(clave)) {
+                    JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso.\nBienvenido " + datos[0], "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Clave incorrecta.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "El usuario no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
         // Evento para ir a la ventana de Registro
         registerButton.addActionListener(e -> {
             dispose();
             new RegisterFrame();
         });
 
-        // Agrega botones al panel
-        buttonPanel.add(backButton);
+        // Agregamos los botones: Se incluye el botón de "Iniciar Sesión" además de "Regresar" y "Registrar"
+        buttonPanel.add(loginButton);
+        //buttonPanel.add(backButton);
         buttonPanel.add(registerButton);
 
         // Agrega componentes al panel principal

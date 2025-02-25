@@ -1,4 +1,4 @@
-package main.model;
+package main.Model.gestionPublicacion;
 
 //Librerias
 import java.util.ArrayList;

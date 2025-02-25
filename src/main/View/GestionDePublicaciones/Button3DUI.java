@@ -1,4 +1,4 @@
-package main.View.GestionDePublicaciones;
+package main.View.gestionDePublicaciones;
 
 import javax.swing.*;
 import javax.swing.border.*;

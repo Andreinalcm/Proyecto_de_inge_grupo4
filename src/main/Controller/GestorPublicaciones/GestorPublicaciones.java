@@ -1,8 +1,8 @@
-package main.Controller.GestorPublicaciones;
+package main.Controller.gestorPublicaciones;
 
 //Paquetes importados
 //import main.Entidad.Publicacion;
-import main.model.Publicacion;
+import main.Model.gestionPublicacion.Publicacion;
 
 //Librerias
 import java.util.ArrayList;
