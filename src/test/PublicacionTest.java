@@ -11,12 +11,10 @@ public class PublicacionTest {
 @Test
     public void test(){
         Publicacion pu = new Publicacion("Adios", "" , "Ayuda", "c Murióóóoooooooo", "WIna");
-        Publicacion publico = new Publicacion("EDO", "2025-03-04 14:18", "Matemática", "EDOs, ayuda", "Yo") ;
+        Publicacion publicacionEsperada = new Publicacion("EDO", "2025-03-04 14:18", "Matemática", "EDOs, ayuda", "Yo") ;
     
 
-        assertSame(pu, publico);
-        assertSame(pu, pu);
-        assertSame(publico, publico);
+        assertEquals(publicacionEsperada.getfechaDePublicacion(), pu.getfechaDePublicacion());
     
 
     }
