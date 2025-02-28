@@ -74,7 +74,7 @@ public class EventoTest {
     }
 
 
-   /*  
+    
     // Prueba para verificar la fecha y hora de inicio original (sin formatear)
     @Test
     public void testGetFechaHoraInicioOriginal() {
@@ -87,5 +87,5 @@ public class EventoTest {
         assertEquals("La fecha y hora de fin original no coinciden.", evento.getFechaHoraFinOriginal(), fechaHoraFin);
     }
 
-    */
+    
     }
