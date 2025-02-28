@@ -4,7 +4,7 @@ package main.View.gestionDePublicaciones;
 //import main.Entidad.Publicacion;
 import main.Controller.gestorPublicaciones.GestorPublicaciones;
 import main.Model.gestionPublicacion.Publicacion;
-
+import main.Model.gestionDeUsuario.*;
 
 //Librerias
 import javax.swing.*;
@@ -19,6 +19,7 @@ public class VentanaPublicaciones extends JFrame {
     JButton crearPublicacionBtn;
     JPanel PublicacionesPanel;
     private GestorPublicaciones gestor;
+    private Usuario usuarioAct;
 
     // Crear la ventana principal
     public VentanaPublicaciones(GestorPublicaciones gestor) {
@@ -113,6 +114,7 @@ public class VentanaPublicaciones extends JFrame {
 
         for (Publicacion Publicacion : Publicacions) {
             // Crear un panel para cada Publicacion
+            int i = 0;
             JPanel PublicacionPanel = new JPanel();
             PublicacionPanel.setLayout(new BoxLayout(PublicacionPanel, BoxLayout.X_AXIS));
             PublicacionPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2)); // Bordes de los Publicacions
@@ -122,8 +124,13 @@ public class VentanaPublicaciones extends JFrame {
             JLabel infoLabel = new JLabel("<html><b>" + Publicacion.getTitulo() + "</b><br>" +
                     "Fecha Inicio: " + Publicacion.getfechaDePublicacion() + "<br>Estado: " + Publicacion.getEstado() + "</html>");
             PublicacionPanel.add(infoLabel);
+            JButton verBtn = new JButton("Ver");
 
-            // Si el Publicacion está pendiente, mostrar los botones de aprobar y rechazar
+       verBtn.addActionListener(e->{
+       
+       });
+
+            // Si la Publicacion está pendiente, mostrar los botones de aprobar y rechazar
             if (Publicacion.getEstado().equals("Pendiente")) {
                 JButton aprobarBtn = new JButton("Aprobar");
                 JButton rechazarBtn = new JButton("Rechazar");
@@ -148,7 +155,7 @@ public class VentanaPublicaciones extends JFrame {
                 PublicacionPanel.add(aprobarBtn);
                 PublicacionPanel.add(rechazarBtn);
             }
-
+            PublicacionPanel.add(verBtn);
             // Agregar el panel del Publicacion al panel principal
             PublicacionsPanel.add(PublicacionPanel);
         }

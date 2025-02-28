@@ -11,6 +11,7 @@ public class UsuarioTest {
         String nombrePrueba = "Patata";
         String email = "user@gmail.com";
         String rol = "estudiante";
+        
 
         Usuario userTest = new Usuario(nombrePrueba, email, rol);
 
