@@ -19,11 +19,10 @@ public class FormularioDeEventos {
         this.usuario = usuario;
         frame = new JFrame("Publicar evento");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Pantalla completa
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setLayout(new BorderLayout());
-        frame.getContentPane().setBackground(Color.BLACK); // Fondo negro
+        frame.getContentPane().setBackground(Color.BLACK);
 
-        // Agregar el título centrado en la parte superior
         agregarTitulo();
         crearFormulario();
     }
@@ -32,9 +31,8 @@ public class FormularioDeEventos {
         JLabel titulo = new JLabel("Publicar evento");
         titulo.setHorizontalAlignment(SwingConstants.CENTER);
         titulo.setFont(new Font("Arial", Font.BOLD, 24));
-        titulo.setForeground(Color.WHITE); // Texto en blanco
-        titulo.setBorder(BorderFactory.createEmptyBorder(50, 0, 20, 0)); // Margen superior de 50 y inferior de 20
-        frame.add(titulo, BorderLayout.NORTH);
+        titulo.setForeground(Color.WHITE);
+        titulo.setBorder(BorderFactory.createEmptyBorder(50, 0, 20, 0));
     }
 
     private void crearFormulario() {
@@ -69,19 +67,22 @@ public class FormularioDeEventos {
             String fechaHoraFin = fechaHoraFinField.getText().trim();
             String ubicacion = ubicacionField.getText().trim();
             String estado = "Pendiente";
-
-            if (!titulo.isEmpty() && !descripcion.isEmpty() && !fechaHoraInicio.isEmpty()
-                    && !fechaHoraFin.isEmpty() && !ubicacion.isEmpty()) {
-
-                controller.crearEvento(titulo, descripcion, fechaHoraInicio, fechaHoraFin, ubicacion, usuario, estado);
-                //guardarEventoEnArchivo(titulo, descripcion, fechaHoraInicio, fechaHoraFin, ubicacion, usuario.getNombre(), estado);
-
+        
+            // Verificar si todos los campos están llenos
+            if (titulo.isEmpty() || descripcion.isEmpty() || fechaHoraInicio.isEmpty()
+                    || fechaHoraFin.isEmpty() || ubicacion.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+                return; // Detener la ejecución si hay campos vacíos
+            }
+        
+            // Intentar crear el evento
+            boolean eventoCreado = controller.crearEvento(titulo, descripcion, fechaHoraInicio, fechaHoraFin, ubicacion, usuario, estado);
+        
+            // Solo abrir la ventana MisEventos si el evento se creó correctamente
+            if (eventoCreado) {
                 MisEventos misEventos = new MisEventos(controller, usuario);
                 misEventos.setVisible(true);
-                frame.setVisible(false);
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+                frame.setVisible(false); // Cerrar la ventana actual
             }
         });
 
@@ -92,7 +93,7 @@ public class FormularioDeEventos {
         });
 
         JPanel botonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-        botonPanel.setBackground(Color.BLACK); // Fondo negro
+        botonPanel.setBackground(Color.BLACK);
         botonPanel.add(publicarBtn);
         botonPanel.add(descartarBtn);
 
@@ -102,17 +103,17 @@ public class FormularioDeEventos {
 
     private JLabel crearEtiqueta(String texto) {
         JLabel etiqueta = new JLabel(texto);
-        etiqueta.setForeground(Color.WHITE); // Texto en blanco
+        etiqueta.setForeground(Color.WHITE);
         etiqueta.setFont(new Font("Arial", Font.BOLD, 14));
         return etiqueta;
     }
 
     private JTextField crearTextField() {
         JTextField textField = new JTextField(15);
-        textField.setBackground(new Color(51, 51, 51)); // Color de fondo
-        textField.setForeground(Color.WHITE); // Texto en blanco
+        textField.setBackground(new Color(51, 51, 51));
+        textField.setForeground(Color.WHITE); 
         textField.setFont(new Font("Arial", Font.PLAIN, 14));
-        textField.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10)); // Padding
+        textField.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
         return textField;
     }
 
@@ -131,22 +132,20 @@ public class FormularioDeEventos {
             @Override
             public Dimension getPreferredSize() {
                 Dimension size = super.getPreferredSize();
-                size.width = Math.max(size.width, 150); // Ancho mínimo
-                size.height = 40; // Altura fija
+                size.width = Math.max(size.width, 150);
+                size.height = 40;
                 return size;
             }
         };
 
         boton.setFont(new Font("Arial", Font.BOLD, 14));
-        boton.setForeground(Color.WHITE); // Texto en blanco
+        boton.setForeground(Color.WHITE);
         boton.setBackground(color);
         boton.setFocusPainted(false);
-        boton.setOpaque(false); // Fondo transparente
-        boton.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10)); // Padding
+        boton.setOpaque(false);
+        boton.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
         return boton;
     }
-
-    
 
     public JFrame getFrame() {
         return frame;

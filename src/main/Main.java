@@ -2,9 +2,12 @@ package main;
 
 //Paquetes importados
 //import main.Entidad.*;
+
+import main.View.gestionRegistroLogin.*;
+
+/*
 import main.Controller.gestorPublicaciones.GestorPublicaciones;
 import main.View.gestionDePublicaciones.VentanaPublicaciones;
-import main.View.gestionRegistroLogin.*;
 import main.View.calendario.Calendario;
 import main.View.gestionDePublicaciones.VentanaCrearPublicacion;
 import main.Model.gestionPublicacion.Publicacion;
@@ -21,7 +24,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+*/
 
 //librerias
 import javax.swing.SwingUtilities;

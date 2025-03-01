@@ -3,6 +3,9 @@ package main.Controller.gestorRegistroLogin;
 // LoginRegisterApp.java
 import javax.swing.*;
 import javax.swing.border.*;
+
+import main.Model.gestionDeUsuario.Usuario;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -49,6 +52,19 @@ public class LoginRegisterApp {
         return usuarios;
     }
 
+    // Método para buscar un usuario por nombre de usuario y contraseña
+    public static Usuario buscarUsuario(String usuario, String clave) {
+        Map<String, String[]> usuarios = leerUsuarios();
+        if (usuarios.containsKey(usuario)) {
+            String[] datos = usuarios.get(usuario);
+            String claveRegistrada = datos[2];
+            if (claveRegistrada.equals(clave)) {
+                return new Usuario(datos[0], datos[1], "Profesor"); // Cambia "Profesor" por el rol correcto si es necesario
+            }
+        }
+        return null; // Si no se encuentra el usuario o la clave es incorrecta
+    }
+
     // Método para guardar un usuario en el archivo
     public static void guardarUsuario(String usuario, String nombre, String correo, String clave) {
         verificarCarpetaDatos(); // Asegurar que la carpeta exista
@@ -61,5 +77,4 @@ public class LoginRegisterApp {
             JOptionPane.showMessageDialog(null, "Error al guardar el usuario.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
 }

@@ -48,7 +48,6 @@ public class LoginFrame extends JFrame {
         JLabel userLabel = new JLabel("Usuario:");
         userLabel.setForeground(Color.WHITE);
         JTextField userField = new JTextField();
-        // Aplica color de fondo y letra a los campos
         userField.setBackground(Color.LIGHT_GRAY);
         userField.setForeground(Color.BLACK);
         userField.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
@@ -73,7 +72,6 @@ public class LoginFrame extends JFrame {
         JButton backButton = new JButton("Regresar");
         JButton registerButton = new JButton("Registrar");
 
-        // Aplica estilo 3D a los botones usando la clase utilitaria
         ButtonUtils.styleButton3D(backButton);
         ButtonUtils.styleButton3D(registerButton);
 
@@ -89,27 +87,19 @@ public class LoginFrame extends JFrame {
                 return;
             }
 
-            Map<String, String[]> usuarios = LoginRegisterApp.leerUsuarios();
-            if (usuarios.containsKey(usuario)) {
-                String[] datos = usuarios.get(usuario);
-                String claveRegistrada = datos[2];
-                if (claveRegistrada.equals(clave)) {
-                    JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso.\nBienvenido " + datos[0], "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Clave incorrecta.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+            Usuario usuarioActual = LoginRegisterApp.buscarUsuario(usuario, clave);
+            if (usuarioActual != null) {
+                JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso.\nBienvenido " + usuarioActual.getNombre(), "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+                // Crear el Dashboard con el usuario actual
+                RepositorioEventos repositorio2 = new RepositorioEventosArchivo();
+                GestorDeEventos controller = GestorDeEventos.getInstancia(repositorio2); // Usar getInstancia
+                Dashboard dashboard = new Dashboard(controller, usuarioActual);
+                dashboard.setVisible(true);
+                dispose(); // Cerrar la ventana de inicio de sesión
             } else {
-                JOptionPane.showMessageDialog(this, "El usuario no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Usuario o clave incorrectos.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-
-            Usuario usuarioActual = new Usuario("Andreina", "hola@gmail.com", "Profesor");
-            RepositorioEventos repositorio2 = new RepositorioEventosArchivo();
-            GestorDeEventos controller = GestorDeEventos.getInstancia(repositorio2); // Usar getInstancia
-
-            // Solo mostrar el Dashboard al inicio
-            Dashboard dashboard = new Dashboard(controller, usuarioActual);
-            dashboard.setVisible(true);
-            dispose();
         });
 
         // Evento para ir a la ventana de Registro
@@ -118,19 +108,14 @@ public class LoginFrame extends JFrame {
             new RegisterFrame();
         });
 
-        // Agregamos los botones: Se incluye el botón de "Iniciar Sesión" además de "Regresar" y "Registrar"
         buttonPanel.add(loginButton);
-        //buttonPanel.add(backButton);
         buttonPanel.add(registerButton);
 
-        // Agrega componentes al panel principal
         mainPanel.add(titleLabel, BorderLayout.NORTH);
         mainPanel.add(centerPanel, BorderLayout.CENTER);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
-        // Agrega el panel principal a la ventana
         add(mainPanel);
-
         setVisible(true);
     }
 }

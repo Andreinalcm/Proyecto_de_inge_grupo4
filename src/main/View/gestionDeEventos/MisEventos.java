@@ -140,7 +140,9 @@ public class MisEventos {
                 JButton eliminarBtn = crearBoton("Eliminar", new Color(51, 51, 51));
 
                 verBtn.addActionListener(e -> {
-                    // Lógica para ver el evento
+                    // Abrir la vista de detalles del evento
+                    VistaDeEvento eventoVista = new VistaDeEvento(evento, frame);
+                    eventoVista.getFrame().setVisible(true);
                 });
 
                 editarBtn.addActionListener(e -> {
