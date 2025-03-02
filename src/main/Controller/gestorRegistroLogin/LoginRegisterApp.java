@@ -30,7 +30,7 @@ public class LoginRegisterApp {
         verificarCarpetaDatos(); // Asegurar que la carpeta exista
         Map<String, String[]> usuarios = new HashMap<>();
         File archivo = new File(ARCHIVO_USUARIOS);
-
+    
         if (!archivo.exists()) {
             try {
                 archivo.createNewFile();
@@ -42,8 +42,8 @@ public class LoginRegisterApp {
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] partes = linea.split(",");
-                if (partes.length == 4) {
-                    usuarios.put(partes[0], new String[]{partes[1], partes[2], partes[3]});
+                if (partes.length == 5) { 
+                    usuarios.put(partes[0], new String[]{partes[1], partes[2], partes[3], partes[4]});
                 }
             }
         } catch (IOException e) {
@@ -57,9 +57,9 @@ public class LoginRegisterApp {
         Map<String, String[]> usuarios = leerUsuarios();
         if (usuarios.containsKey(usuario)) {
             String[] datos = usuarios.get(usuario);
-            String claveRegistrada = datos[2];
+            String claveRegistrada = datos[2]; // La clave está en el índice 2
             if (claveRegistrada.equals(clave)) {
-                return new Usuario(usuario, datos[0], datos[1], datos[3]); // Corregido
+                return new Usuario(usuario, datos[0], datos[1], datos[3]);
             }
         }
         return null; // Si no se encuentra el usuario o la clave es incorrecta
