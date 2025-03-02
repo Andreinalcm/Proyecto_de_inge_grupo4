@@ -251,7 +251,7 @@ public class VentanaCrearPublicacion extends JFrame {
         // Limpiar el título para usarlo como nombre de archivo
         String nombreArchivo = titulo + ".txt";
         //String nombreArchivo = titulo.replaceAll("[^a-zA-Z0-9\\.\\-]", "_") + ".txt";
-        String rutaArchivo = "./main/Data/" + nombreArchivo;
+        String rutaArchivo = "./main/Data/Publicaciones/" + nombreArchivo;
         System.out.println("Ruta del archivo: " + rutaArchivo);
         System.out.println("Directorio de trabajo: " + System.getProperty("user.dir"));
         try (FileWriter writer = new FileWriter(rutaArchivo, true)) { // true para agregar al final del archivo
