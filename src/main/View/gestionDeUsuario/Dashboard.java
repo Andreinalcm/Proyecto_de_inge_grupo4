@@ -18,6 +18,7 @@ import main.View.calendario.Calendario;
 import main.View.calendario.DayLabel;
 import main.Controller.gestorPublicaciones.GestorPublicaciones;
 import main.Model.gestionPublicacion.Publicacion;
+import main.Controller.gestionNotificacion.GestorNotificaciones;
 
 public class Dashboard extends JFrame {
 
@@ -184,6 +185,11 @@ public class Dashboard extends JFrame {
         });
 
         setVisible(true);
+
+        // Mostrar notificaciones después de que el dashboard esté construido
+        SwingUtilities.invokeLater(() -> {
+            GestorNotificaciones.getInstancia().mostrarNotificacionesParaUsuario(usuario);
+        });
     }
 
     private JButton crearBoton(String texto) {

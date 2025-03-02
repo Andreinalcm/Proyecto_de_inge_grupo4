@@ -61,8 +61,6 @@ public class LoginRegisterApp {
             String claveRegistrada = datos[2];
             if (claveRegistrada.equals(clave)) {
                 Usuario usuarioEncontrado = new Usuario(usuario, datos[0], datos[1], datos[3]);
-                // Mostrar notificaciones al usuario que inicia sesión
-                GestorNotificaciones.getInstancia().mostrarNotificacionesParaUsuario(usuarioEncontrado);
                 return usuarioEncontrado;
             }
         }

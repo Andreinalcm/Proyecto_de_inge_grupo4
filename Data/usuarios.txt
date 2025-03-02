@@ -2,4 +2,4 @@ a123,Andreina Lacruz,andreina@gmail.com,123,Moderador
 g123,Glen,glen@gmail.com,123,Profesor
 L123,Luis,luis@gmail,com,123,Estudiante
 m123,Manuel,manuel@gmail.com,123,Personal de apoyo
-f123,Fabiana González,fabiana@gmail.com,123,Moderador
+f123,Fabiana González,fabiana@gmail.com,123,Moderadorfelix123,felix,felix1234@gmail.com,123,moderador
