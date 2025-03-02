@@ -101,13 +101,13 @@ public class GestorDeEventos {
         return repositorio.getTodosLosEventos();
     }
 
-    public void aprobarPublicacion(Evento evento) {
+    public void aprobarEvento(Evento evento) {
         evento.setEstado("Aprobado");
-        repositorio.actualizarEvento(evento);
+        repositorio.actualizarEvento(evento); // Asegúrate de que este método esté implementado en RepositorioEventos
     }
-
+    
     public void rechazarEvento(Evento evento) {
         evento.setEstado("Rechazado");
-        repositorio.actualizarEvento(evento);
+        repositorio.actualizarEvento(evento); // Asegúrate de que este método esté implementado en RepositorioEventos
     }
 }
