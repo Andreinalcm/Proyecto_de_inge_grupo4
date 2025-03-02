@@ -9,6 +9,7 @@ import main.Controller.gestionDeEventos.GestorDeEventos;
 import main.Model.gestionDeUsuario.Usuario;
 import main.View.gestionDeEventos.FormularioDeEventos;
 import main.View.gestionDeEventos.MisEventos;
+import main.View.gestionDeEventos.EventosYPublicaciones; // Importar la nueva vista
 import main.View.gestionDePublicaciones.VentanaCrearPublicacion;
 import main.View.gestionDePublicaciones.VentanaPublicaciones;
 import main.View.gestionRegistroLogin.LoginFrame;
@@ -77,7 +78,7 @@ public class Dashboard extends JFrame {
             panelBotones.add(Box.createRigidArea(new Dimension(0, 10)));
             panelBotones.add(misPublicacionesBtn);
 
-            //Elemenos para publicación
+            //Elementos para publicación
             Publicacion repositorio = new Publicacion();
             gestorP = GestorPublicaciones.getInstancia(repositorio);
             VentanaPublicaciones ventana = new VentanaPublicaciones(gestorP);
@@ -107,7 +108,6 @@ public class Dashboard extends JFrame {
                 ventana.setVisible(true);
                 this.setVisible(true); // Oculta el Dashboard
             });
-
         }
 
         // Añadir el panel de botones al panel principal
@@ -151,15 +151,14 @@ public class Dashboard extends JFrame {
             this.setVisible(false); // Oculta el Dashboard
         });
 
-        /* 
-        revisarCalendarioBtn.addActionListener(e -> {
-            MisEventos misEventos = new MisEventos(controller, usuario);
-            misEventos.setVisible(true);
+        // ActionListener para el botón "Eventos y publicaciones"
+        eventosPublicacionesBtn.addActionListener(e -> {
+            EventosYPublicaciones eventosYPublicaciones = new EventosYPublicaciones(controller, usuario);
+            eventosYPublicaciones.setVisible(true);
             this.setVisible(false); // Oculta el Dashboard
         });
-        */
 
-        //calendario
+        // ActionListener para el botón "Revisar calendario"
         revisarCalendarioBtn.addActionListener(e -> {
             // Crear la ventana
             JFrame ventana3 = new JFrame("Calendario");
@@ -169,9 +168,8 @@ public class Dashboard extends JFrame {
             ventana3.setLocationRelativeTo(null);
             // Establecer el color de fondo del contenido de la ventana
             ventana3.getContentPane().setBackground(Color.black);
-            JPanel mainPanel = new JPanel( new GridLayout(1,2,0,0));
-            mainPanel.add(new Calendario(2025,2));
-            //mainPanel.add(new Evento());
+            JPanel mainPanel = new JPanel(new GridLayout(1, 2, 0, 0));
+            mainPanel.add(new Calendario(2025, 2));
             ventana3.getContentPane().add(mainPanel);
             // Hacer visible la ventana
             ventana3.setVisible(true);
@@ -185,8 +183,6 @@ public class Dashboard extends JFrame {
             SwingUtilities.invokeLater(() -> new LoginFrame());
             dispose();
         });
-
-        
 
         setVisible(true);
     }

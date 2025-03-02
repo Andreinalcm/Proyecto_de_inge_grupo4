@@ -14,17 +14,17 @@ import main.Model.gestionDeEventos.Evento;
 import main.Model.gestionDeUsuario.Usuario;
 import main.View.gestionDeUsuario.Dashboard;
 
-public class MisEventos {
+public class EventosYPublicaciones {
 
     private GestorDeEventos controller;
     private JFrame frame;
     private JPanel eventosPanel;
     private Usuario usuario;
 
-    public MisEventos(GestorDeEventos controller, Usuario usuario) {
+    public EventosYPublicaciones(GestorDeEventos controller, Usuario usuario) {
         this.controller = controller;
         this.usuario = usuario;
-        frame = new JFrame("Mis eventos");
+        frame = new JFrame("Eventos y publicaciones");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Pantalla completa
         frame.setLayout(new BorderLayout());
@@ -39,7 +39,7 @@ public class MisEventos {
     }
 
     private void agregarTitulo() {
-        JLabel titulo = new JLabel("Mis eventos");
+        JLabel titulo = new JLabel("Eventos y publicaciones");
         titulo.setHorizontalAlignment(SwingConstants.CENTER);
         titulo.setFont(new Font("Arial", Font.BOLD, 24));
         titulo.setForeground(Color.WHITE); // Texto en blanco
@@ -68,6 +68,16 @@ public class MisEventos {
 
         panel.add(publicarEventoBtn);
         panel.add(dashboardBtn);
+
+        // Mostrar el botón "Hacer una publicación" solo si el usuario no es un Estudiante
+        if (!usuario.getRol().equals("Estudiante")) {
+            JButton hacerPublicacionBtn = crearBoton("Hacer una publicación", new Color(51, 51, 51));
+            hacerPublicacionBtn.addActionListener(e -> {
+                // Lógica para abrir la vista de creación de publicaciones
+                // Aquí puedes agregar el código para abrir la vista correspondiente
+            });
+            panel.add(hacerPublicacionBtn);
+        }
 
         frame.add(panel, BorderLayout.SOUTH); // Botones en la parte inferior
     }
@@ -106,20 +116,20 @@ public class MisEventos {
         eventosPanel = new JPanel();
         eventosPanel.setLayout(new BoxLayout(eventosPanel, BoxLayout.Y_AXIS));
         eventosPanel.setBackground(Color.BLACK); // Fondo negro
-    
+
         // Crear un panel contenedor con margen
         JPanel contenedorEventos = new JPanel(new BorderLayout());
         contenedorEventos.setBackground(Color.BLACK); // Fondo negro
         contenedorEventos.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Margen de 20 píxeles en todos los lados
         contenedorEventos.add(eventosPanel, BorderLayout.CENTER);
-    
+
         JScrollPane scrollPane = new JScrollPane(contenedorEventos);
         scrollPane.setBorder(BorderFactory.createEmptyBorder()); // Sin borde
         scrollPane.getViewport().setBackground(Color.BLACK); // Fondo negro
-    
+
         frame.add(scrollPane, BorderLayout.CENTER);
-    
-        // Leer el archivo y mostrar solo los eventos del usuario
+
+        // Leer el archivo y mostrar solo los eventos de otros usuarios
         actualizarEventosArea();
     }
 
@@ -128,7 +138,8 @@ public class MisEventos {
         eventosPanel.removeAll();
 
         for (Evento evento : eventos) {
-            if (evento.getCreador().equals(usuario.getNombre())) {
+            // Verificar si el evento es de otro usuario y está aprobado
+            if (!evento.getCreador().equals(usuario.getNombre()) && evento.getEstado().equals("Aprobado")) {
                 JPanel eventoPanel = new JPanel();
                 eventoPanel.setLayout(new BoxLayout(eventoPanel, BoxLayout.X_AXIS));
                 eventoPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
@@ -141,9 +152,12 @@ public class MisEventos {
                 infoLabel.setForeground(Color.WHITE); // Texto en blanco
                 eventoPanel.add(infoLabel);
 
+                JButton agregarBtn = crearBoton("Agregar al calendario", new Color(51, 51, 51));
                 JButton verBtn = crearBoton("Ver", new Color(51, 51, 51));
-                JButton editarBtn = crearBoton("Editar", new Color(51, 51, 51));
-                JButton eliminarBtn = crearBoton("Eliminar", new Color(51, 51, 51));
+
+                agregarBtn.addActionListener(e -> {
+                    // Lógica para agregar el evento al calendario
+                });
 
                 verBtn.addActionListener(e -> {
                     // Abrir la vista de detalles del evento
@@ -151,17 +165,8 @@ public class MisEventos {
                     vistaDeEvento.getFrame().setVisible(true);
                 });
 
-                editarBtn.addActionListener(e -> {
-                    // Lógica para editar el evento
-                });
-
-                eliminarBtn.addActionListener(e -> {
-                    // Lógica para eliminar el evento
-                });
-
+                eventoPanel.add(agregarBtn);
                 eventoPanel.add(verBtn);
-                eventoPanel.add(editarBtn);
-                eventoPanel.add(eliminarBtn);
 
                 eventosPanel.add(eventoPanel);
             }
@@ -174,12 +179,12 @@ public class MisEventos {
     private List<Evento> leerEventosDelArchivo() {
         List<Evento> eventos = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); // Formato de fecha
-    
+
         try (BufferedReader reader = new BufferedReader(new FileReader("src/main/Data/Evento.txt"))) {
             String linea;
             while ((linea = reader.readLine()) != null) {
                 String[] partes = linea.split(",");
-                if (partes.length == 7) { // Asegúrate de que hay 7 campos
+                if (partes.length == 7) {
                     String titulo = partes[0].trim();
                     String fechaInicioStr = partes[1].trim();
                     String fechaFinStr = partes[2].trim();
@@ -187,11 +192,11 @@ public class MisEventos {
                     String descripcion = partes[4].trim();
                     String nombreUsuario = partes[5].trim();
                     String estado = partes[6].trim();
-    
+
                     // Convertir las fechas de String a LocalDateTime
                     LocalDateTime fechaInicio = LocalDateTime.parse(fechaInicioStr, formatter);
                     LocalDateTime fechaFin = LocalDateTime.parse(fechaFinStr, formatter);
-    
+
                     // Crear el evento con el constructor correcto
                     eventos.add(new Evento(titulo, fechaInicio, fechaFin, ubicacion, descripcion, nombreUsuario, estado));
                 }

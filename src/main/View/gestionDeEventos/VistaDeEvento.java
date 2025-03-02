@@ -3,17 +3,20 @@ package main.View.gestionDeEventos;
 import java.awt.*;
 import javax.swing.*;
 import main.Model.gestionDeEventos.Evento;
+import main.Model.gestionDeUsuario.Usuario;
 
 public class VistaDeEvento {
 
     private JFrame frame;
     private Evento evento;
     private JFrame ventanaAnterior; // Referencia a la ventana anterior (MisEventos)
+    private Usuario usuario; // Usuario actual
 
-    public VistaDeEvento(Evento evento, JFrame ventanaAnterior) {
+    public VistaDeEvento(Evento evento, JFrame ventanaAnterior, Usuario usuario) {
         this.evento = evento;
         this.ventanaAnterior = ventanaAnterior;
-        frame = new JFrame("Evento" + evento.getTitulo());
+        this.usuario = usuario; // Inicializar el usuario actual
+        frame = new JFrame("Evento: " + evento.getTitulo());
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Pantalla completa
         frame.setLayout(new BorderLayout());
@@ -136,35 +139,51 @@ public class VistaDeEvento {
     private void crearPanelBotones() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         panel.setBackground(Color.BLACK); // Fondo negro
-
+    
         JButton comentariosBtn = crearBoton("Comentarios", new Color(51, 51, 51));
         JButton editarBtn = crearBoton("Editar", new Color(51, 51, 51));
         JButton comentarBtn = crearBoton("Comentar", new Color(51, 51, 51));
         JButton regresarBtn = crearBoton("Regresar", new Color(51, 51, 51));
-
+        JButton agregarAlCalendarioBtn = crearBoton("Agregar al calendario", new Color(51, 51, 51));
+    
         // ActionListeners para los botones
         comentariosBtn.addActionListener(e -> {
             // Lógica para ver comentarios
         });
-
+    
         editarBtn.addActionListener(e -> {
             // Lógica para editar el evento
         });
-
+    
         comentarBtn.addActionListener(e -> {
             // Lógica para agregar un comentario
         });
-
+    
         regresarBtn.addActionListener(e -> {
             frame.dispose(); // Cerrar la ventana actual
             ventanaAnterior.setVisible(true); // Mostrar la ventana anterior (MisEventos)
         });
-
+    
+        agregarAlCalendarioBtn.addActionListener(e -> {
+            // Lógica para agregar el evento al calendario
+            JOptionPane.showMessageDialog(frame, "Evento agregado al calendario.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        });
+    
         panel.add(comentariosBtn);
-        panel.add(editarBtn);
         panel.add(comentarBtn);
-        panel.add(regresarBtn);
+    
+        // Solo mostrar el botón "Editar" si el creador del evento es el usuario actual
+        if (evento.getCreador().equals(usuario.getNombre())) {
+            panel.add(editarBtn);
+        }
 
+        // Solo mostrar el botón "Agregar al calendario" si el creador del evento no es el usuario actual
+        if (!evento.getCreador().equals(usuario.getNombre())) {
+            panel.add(agregarAlCalendarioBtn);
+        }
+
+        panel.add(regresarBtn);
+    
         frame.add(panel, BorderLayout.SOUTH);
     }
 
@@ -197,8 +216,6 @@ public class VistaDeEvento {
         boton.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10)); // Padding
         return boton;
     }
-
-    // Clase interna para el panel con bordes redondeados
 
     public JFrame getFrame() {
         return frame;

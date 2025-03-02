@@ -33,6 +33,7 @@ public class FormularioDeEventos {
         titulo.setFont(new Font("Arial", Font.BOLD, 24));
         titulo.setForeground(Color.WHITE);
         titulo.setBorder(BorderFactory.createEmptyBorder(50, 0, 20, 0));
+        frame.add(titulo, BorderLayout.NORTH); // Agregar el título al frame
     }
 
     private void crearFormulario() {
