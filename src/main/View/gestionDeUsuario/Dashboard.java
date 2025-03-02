@@ -9,6 +9,7 @@ import main.Controller.gestionDeEventos.GestorDeEventos;
 import main.Model.gestionDeUsuario.Usuario;
 import main.View.gestionDeEventos.FormularioDeEventos;
 import main.View.gestionDeEventos.MisEventos;
+import main.View.gestionDeEventos.RevisarPublicacionesOEventos;
 import main.View.gestionDeEventos.EventosYPublicaciones; // Importar la nueva vista
 import main.View.gestionDePublicaciones.VentanaCrearPublicacion;
 import main.View.gestionDePublicaciones.VentanaPublicaciones;
@@ -78,7 +79,7 @@ public class Dashboard extends JFrame {
             panelBotones.add(Box.createRigidArea(new Dimension(0, 10)));
             panelBotones.add(misPublicacionesBtn);
 
-            //Elementos para publicación
+            // Elementos para publicación
             Publicacion repositorio = new Publicacion();
             gestorP = GestorPublicaciones.getInstancia(repositorio);
             VentanaPublicaciones ventana = new VentanaPublicaciones(gestorP);
@@ -100,13 +101,11 @@ public class Dashboard extends JFrame {
             panelBotones.add(Box.createRigidArea(new Dimension(0, 10)));
             panelBotones.add(revisarPublicacionesBtn);
 
-            Publicacion repositorio = new Publicacion();
-            gestorP = GestorPublicaciones.getInstancia(repositorio);
-            VentanaPublicaciones ventana = new VentanaPublicaciones(gestorP);
-
             revisarPublicacionesBtn.addActionListener(e -> {
-                ventana.setVisible(true);
-                this.setVisible(true); // Oculta el Dashboard
+                RevisarPublicacionesOEventos revisarPublicaciones = new RevisarPublicacionesOEventos(controller,
+                        usuario);
+                revisarPublicaciones.setVisible(true);
+                this.setVisible(false); // Oculta el Dashboard
             });
         }
 
