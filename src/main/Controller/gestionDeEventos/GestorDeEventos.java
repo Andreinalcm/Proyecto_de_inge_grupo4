@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import main.Model.gestionDeEventos.Evento;
 import main.Model.gestionDeEventos.RepositorioEventos;
 import main.Model.gestionDeUsuario.Usuario;
+import main.Controller.gestionNotificacion.GestorNotificaciones;
 
 public class GestorDeEventos {
 
@@ -103,7 +104,14 @@ public class GestorDeEventos {
 
     public void aprobarEvento(Evento evento) {
         evento.setEstado("Aprobado");
-        repositorio.actualizarEvento(evento); // Asegúrate de que este método esté implementado en RepositorioEventos
+        repositorio.actualizarEvento(evento);
+        // Agregar notificación
+        GestorNotificaciones.agregarNotificacion(
+            evento.getTitulo(),
+            evento.getFechaHoraInicio(),
+            evento.getCreador(),
+            "Evento"
+        );
     }
     
     public void rechazarEvento(Evento evento) {

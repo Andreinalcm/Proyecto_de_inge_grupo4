@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 import main.Model.gestionDeUsuario.Usuario;
+import main.Controller.gestionNotificacion.GestorNotificaciones;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -57,12 +58,15 @@ public class LoginRegisterApp {
         Map<String, String[]> usuarios = leerUsuarios();
         if (usuarios.containsKey(usuario)) {
             String[] datos = usuarios.get(usuario);
-            String claveRegistrada = datos[2]; // La clave está en el índice 2
+            String claveRegistrada = datos[2];
             if (claveRegistrada.equals(clave)) {
-                return new Usuario(usuario, datos[0], datos[1], datos[3]);
+                Usuario usuarioEncontrado = new Usuario(usuario, datos[0], datos[1], datos[3]);
+                // Mostrar notificaciones al usuario que inicia sesión
+                GestorNotificaciones.getInstancia().mostrarNotificacionesParaUsuario(usuarioEncontrado);
+                return usuarioEncontrado;
             }
         }
-        return null; // Si no se encuentra el usuario o la clave es incorrecta
+        return null;
     }
 
     // Método para guardar un usuario en el archivo

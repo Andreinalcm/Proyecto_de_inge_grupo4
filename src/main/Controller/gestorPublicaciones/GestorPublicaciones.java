@@ -3,6 +3,7 @@ package main.Controller.gestorPublicaciones;
 //Paquetes importados
 //import main.Entidad.Publicacion;
 import main.Model.gestionPublicacion.Publicacion;
+import main.Controller.gestionNotificacion.GestorNotificaciones;
 
 //Librerias
 import java.util.ArrayList;
@@ -47,10 +48,17 @@ public class GestorPublicaciones {
         return repositorio.obtenerTodos();
     }
 
-    public void aprobarPublicacion(Publicacion Publicacion) {
-        Publicacion.setEstado("Aprobado");
-        repositorio.eliminar(Publicacion);
-        PublicacionesAprobados.add(Publicacion);
+    public void aprobarPublicacion(Publicacion publicacion) {
+        publicacion.setEstado("Aprobado");
+        repositorio.eliminar(publicacion);
+        PublicacionesAprobados.add(publicacion);
+        // Agregar notificación
+        GestorNotificaciones.agregarNotificacion(
+            publicacion.getTitulo(),
+            publicacion.getfechaDePublicacion(),
+            publicacion.getCreador(),
+            "Publicacion"
+        );
     }
 
     public void rechazarPublicacion(Publicacion Publicacion) {
