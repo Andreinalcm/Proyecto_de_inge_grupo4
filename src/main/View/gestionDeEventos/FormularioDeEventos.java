@@ -1,8 +1,8 @@
 package main.View.gestionDeEventos;
 
 import java.awt.*;
-import java.io.FileWriter;
-import java.io.IOException;
+//import java.io.FileWriter;
+//import java.io.IOException;
 import javax.swing.*;
 import main.Controller.gestionDeEventos.GestorDeEventos;
 import main.Model.gestionDeUsuario.Usuario;

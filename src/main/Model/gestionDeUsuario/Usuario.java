@@ -5,14 +5,16 @@ import java.util.List;
 import main.Model.gestionDeEventos.Evento;
 
 public class Usuario {
+    private final String usuario;
     private final String nombre;
-    private final String email;
+    private final String correo;
     private final String rol;
     private final List<Evento> eventos;
 
-    public Usuario(String nombre, String email, String rol) {
+    public Usuario(String usuario, String nombre, String email, String rol) {
+        this.usuario = usuario;
         this.nombre = nombre;
-        this.email = email;
+        this.correo = email;
         this.rol = rol;
         this.eventos = new ArrayList<>();
     }
@@ -22,7 +24,7 @@ public class Usuario {
     }
 
     public String getEmail() {
-        return email;
+        return correo;
     }
 
     public String getRol() {

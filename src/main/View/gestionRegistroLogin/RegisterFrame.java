@@ -1,25 +1,22 @@
 package main.View.gestionRegistroLogin;
+
 import main.Controller.gestorRegistroLogin.LoginRegisterApp;
-// LoginRegisterApp.java
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
-import java.util.*;
+import java.util.Map;
 
-// =================== Ventana de Registro ===================
 public class RegisterFrame extends JFrame {
     public RegisterFrame() {
         // Configuración de la ventana
-        setTitle("Registro de Usuario (3D, Blanco y Negro)");
+        setTitle("Registro de Usuario");
         setSize(400, 320);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         // Panel principal
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BorderLayout());
+        JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBackground(Color.BLACK);
 
         // Etiqueta de título
@@ -29,68 +26,33 @@ public class RegisterFrame extends JFrame {
         titleLabel.setBorder(new EmptyBorder(10, 0, 10, 0));
 
         // Panel central con campos
-        JPanel centerPanel = new JPanel(new GridLayout(4, 2, 5, 5));
+        JPanel centerPanel = new JPanel(new GridLayout(5, 2, 10, 10)); // 5 filas, 2 columnas, espaciado de 10px
         centerPanel.setBackground(Color.DARK_GRAY);
-        centerPanel.setBorder(BorderFactory.createCompoundBorder(
-                new BevelBorder(BevelBorder.RAISED, Color.WHITE, Color.GRAY),
-                new EmptyBorder(10, 10, 10, 10)
-        ));
+        centerPanel.setBorder(new EmptyBorder(10, 20, 10, 20)); // Margen interno
 
-        JLabel userLabel = new JLabel("Usuario:");
-        JLabel nameLabel = new JLabel("Nombre:");
-        JLabel emailLabel = new JLabel("Correo:");
-        JLabel passLabel = new JLabel("Clave:");
+        // Crear y agregar etiquetas y campos de texto
+        addLabelAndField(centerPanel, "Usuario:");
+        JTextField userField = addTextField(centerPanel);
 
-        userLabel.setForeground(Color.WHITE);
-        nameLabel.setForeground(Color.WHITE);
-        emailLabel.setForeground(Color.WHITE);
-        passLabel.setForeground(Color.WHITE);
+        addLabelAndField(centerPanel, "Nombre:");
+        JTextField nameField = addTextField(centerPanel);
 
-        JTextField userField = new JTextField();
-        userField.setBackground(Color.LIGHT_GRAY);
-        userField.setForeground(Color.BLACK);
-        userField.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+        addLabelAndField(centerPanel, "Correo:");
+        JTextField emailField = addTextField(centerPanel);
 
-        JTextField nameField = new JTextField();
-        nameField.setBackground(Color.LIGHT_GRAY);
-        nameField.setForeground(Color.BLACK);
-        nameField.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+        addLabelAndField(centerPanel, "Rol:");
+        JTextField rolField = addTextField(centerPanel);
 
-        JTextField emailField = new JTextField();
-        emailField.setBackground(Color.LIGHT_GRAY);
-        emailField.setForeground(Color.BLACK);
-        emailField.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-
-        JPasswordField passField = new JPasswordField();
-        passField.setBackground(Color.LIGHT_GRAY);
-        passField.setForeground(Color.BLACK);
-        passField.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
-
-        centerPanel.add(userLabel);
-        centerPanel.add(userField);
-        centerPanel.add(nameLabel);
-        centerPanel.add(nameField);
-        centerPanel.add(emailLabel);
-        centerPanel.add(emailField);
-        centerPanel.add(passLabel);
-        centerPanel.add(passField);
+        addLabelAndField(centerPanel, "Clave:");
+        JPasswordField passField = addPasswordField(centerPanel);
 
         // Panel de botones
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.BLACK);
         buttonPanel.setBorder(new EmptyBorder(10, 0, 10, 0));
 
-        JButton backButton = new JButton("Regresar");
         JButton registerButton = new JButton("Registrar");
-
-        ButtonUtils.styleButton3D(backButton);
         ButtonUtils.styleButton3D(registerButton);
-
-        // Evento para regresar al Login
-        backButton.addActionListener(e -> {
-            dispose();
-            new LoginFrame();
-        });
 
         // Evento para registrar al usuario
         registerButton.addActionListener(e -> {
@@ -98,31 +60,59 @@ public class RegisterFrame extends JFrame {
             String nombre = nameField.getText().trim();
             String correo = emailField.getText().trim();
             String clave = new String(passField.getPassword()).trim();
+            String rol = rolField.getText().trim();
 
-            if (usuario.isEmpty() || nombre.isEmpty() || correo.isEmpty() || clave.isEmpty()) {
+            if (usuario.isEmpty() || nombre.isEmpty() || correo.isEmpty() || clave.isEmpty() || rol.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Complete todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            
+
             Map<String, String[]> usuarios = LoginRegisterApp.leerUsuarios();
             if (usuarios.containsKey(usuario)) {
                 JOptionPane.showMessageDialog(this, "El usuario ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                LoginRegisterApp.guardarUsuario(usuario, nombre, correo, clave);
+                LoginRegisterApp.guardarUsuario(usuario, nombre, correo, clave, rol);
                 JOptionPane.showMessageDialog(this, "Registro exitoso. Ahora puede iniciar sesión.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 dispose();
                 new LoginFrame();
             }
         });
 
-        //buttonPanel.add(backButton);
         buttonPanel.add(registerButton);
 
+        // Agregar componentes al panel principal
         mainPanel.add(titleLabel, BorderLayout.NORTH);
         mainPanel.add(centerPanel, BorderLayout.CENTER);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         add(mainPanel);
         setVisible(true);
+    }
+
+    // Método para agregar una etiqueta y un campo de texto
+    private void addLabelAndField(JPanel panel, String labelText) {
+        JLabel label = new JLabel(labelText);
+        label.setForeground(Color.WHITE);
+        panel.add(label);
+    }
+
+    // Método para agregar un JTextField
+    private JTextField addTextField(JPanel panel) {
+        JTextField textField = new JTextField();
+        textField.setBackground(Color.LIGHT_GRAY);
+        textField.setForeground(Color.BLACK);
+        textField.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+        panel.add(textField);
+        return textField;
+    }
+
+    // Método para agregar un JPasswordField
+    private JPasswordField addPasswordField(JPanel panel) {
+        JPasswordField passwordField = new JPasswordField();
+        passwordField.setBackground(Color.LIGHT_GRAY);
+        passwordField.setForeground(Color.BLACK);
+        passwordField.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+        panel.add(passwordField);
+        return passwordField;
     }
 }

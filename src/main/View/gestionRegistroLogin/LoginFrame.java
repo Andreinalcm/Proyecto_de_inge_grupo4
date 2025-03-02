@@ -21,7 +21,7 @@ import main.Controller.gestionDeEventos.GestorDeEventos;
 public class LoginFrame extends JFrame {
     public LoginFrame() {
         // Configuración de la ventana
-        setTitle("Inicio de Sesión (3D, Blanco y Negro)");
+        setTitle("Inicio de sesión");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -76,7 +76,7 @@ public class LoginFrame extends JFrame {
         ButtonUtils.styleButton3D(registerButton);
 
         // Evento para iniciar sesión
-        JButton loginButton = new JButton("Iniciar Sesión");
+        JButton loginButton = new JButton("Iniciar sesión");
         ButtonUtils.styleButton3D(loginButton);
         loginButton.addActionListener(e -> {
             String usuario = userField.getText().trim();

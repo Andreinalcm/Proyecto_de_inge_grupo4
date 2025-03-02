@@ -3,3 +3,5 @@ Las plecopteras,2025-12-10 11:00,2025-12-10 12:10,Auditorio Manuel Bemporad,Char
 Sumas parciales no consecutivas,2025-10-10 11:00,2025-11-10 11:00,Auditorio Manuel Bemporad,Charla dicatada por el profesor Eduardo Aponte,Andreina Lacruz,Pendiente
 IA en la ciencia,2025-10-10 11:00,2025-11-10 11:00,Auditorio Tobías Lasser,Charla dicatada por el profesor Luis Aponte,Andreina Lacruz,Pendiente
 Programación con Python impulsada por promts de IA,2025-05-10 09:00,2025-05-10 11:00,Laboratorio CCPD Escuela de computación, El postgrado en Ciencias de la Computación invita a participar en el curso de ampliación (acreditable) Programación con Python impulsada por prompts de IA El curso será dictado por el Dr Andrés Sanoja Director de la Escuela de Computación Doctor en informática Université La Sorbonne,Andreina Lacruz,Pendiente
+prueba 2,2025-10-10 10:00,2025-10-10 12:00,ni idea,nada que decir por aca,ayuda,Pendiente
+fffffff,2025-10-10 10:00,2025-10-10 11:00,hola,ddf,Andreina Lacruz,Pendiente
