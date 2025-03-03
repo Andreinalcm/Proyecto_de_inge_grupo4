@@ -2,7 +2,10 @@ package main.View.gestionDeEventos;
 
 import java.awt.*;
 import javax.swing.*;
+
+import main.Controller.gestionDeEventos.GestorDeEventos;
 import main.Model.gestionDeEventos.Evento;
+import main.Model.gestionDeEventos.RepositorioEventos;
 import main.Model.gestionDeUsuario.Usuario;
 
 public class VistaDeEvento {
@@ -11,11 +14,13 @@ public class VistaDeEvento {
     private Evento evento;
     private JFrame ventanaAnterior; // Referencia a la ventana anterior (MisEventos)
     private Usuario usuario; // Usuario actual
+    private RepositorioEventos repositorio; // Repositorio de eventos
 
-    public VistaDeEvento(Evento evento, JFrame ventanaAnterior, Usuario usuario) {
+    public VistaDeEvento(Evento evento, JFrame ventanaAnterior, Usuario usuario, RepositorioEventos repositorio) {
         this.evento = evento;
         this.ventanaAnterior = ventanaAnterior;
         this.usuario = usuario; // Inicializar el usuario actual
+        this.repositorio = repositorio; // Inicializar el repositorio
         frame = new JFrame("Evento: " + evento.getTitulo());
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Pantalla completa
@@ -56,39 +61,35 @@ public class VistaDeEvento {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBackground(new Color(51, 51, 51)); // Fondo oscuro
         panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Margen interno
-
+    
         // Margen adicional para que no se pegue a los límites de la ventana
         JPanel margenPanel = new JPanel(new BorderLayout());
         margenPanel.setBackground(Color.BLACK); // Fondo negro
         margenPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Margen externo
         margenPanel.add(panel, BorderLayout.CENTER);
-
+    
         // Crear etiquetas con los detalles del evento
         JLabel publicadoPor = new JLabel("Publicado por: " + evento.getCreador());
         JLabel fechaInicio = new JLabel("Fecha/Hora de inicio: " + evento.getFechaHoraInicio());
         JLabel fechaFin = new JLabel("Fecha/Hora de fin: " + evento.getFechaHoraFin());
         JLabel ubicacion = new JLabel("Ubicación: " + evento.getUbicacion());
         JLabel descripcion = new JLabel("Descripción: " + evento.getDescripcion());
-
+    
         // Estilo de las etiquetas
         Font font = new Font("Arial", Font.PLAIN, 16);
         Color colorTexto = Color.WHITE;
-
+    
         publicadoPor.setFont(font);
         publicadoPor.setForeground(colorTexto);
-
         descripcion.setFont(font);
         descripcion.setForeground(colorTexto);
-
         fechaInicio.setFont(font);
         fechaInicio.setForeground(colorTexto);
-
         fechaFin.setFont(font);
         fechaFin.setForeground(colorTexto);
-
         ubicacion.setFont(font);
         ubicacion.setForeground(colorTexto);
-
+    
         // Agregar las etiquetas al panel
         panel.add(publicadoPor);
         panel.add(Box.createRigidArea(new Dimension(0, 10))); // Espacio entre elementos
@@ -99,7 +100,16 @@ public class VistaDeEvento {
         panel.add(fechaFin);
         panel.add(Box.createRigidArea(new Dimension(0, 10)));
         panel.add(ubicacion);
-
+    
+        // Mostrar el estado solo si el usuario actual es el creador del evento
+        if (evento.getCreador().equals(usuario.getNombre())) {
+            JLabel estado = new JLabel("Estado: " + evento.getEstado());
+            estado.setFont(font);
+            estado.setForeground(colorTexto);
+            panel.add(Box.createRigidArea(new Dimension(0, 10)));
+            panel.add(estado);
+        }
+    
         // Agregar el panel con margen al centro de la ventana
         frame.add(margenPanel, BorderLayout.CENTER);
     }
@@ -152,7 +162,12 @@ public class VistaDeEvento {
         });
     
         editarBtn.addActionListener(e -> {
-            // Lógica para editar el evento
+            // Cerrar la ventana actual
+            frame.dispose();
+            
+            // Abrir la vista de edición de evento
+            EditarEvento editarEvento = new EditarEvento(GestorDeEventos.getInstancia(repositorio), usuario, evento);
+            editarEvento.getFrame().setVisible(true);
         });
     
         comentarBtn.addActionListener(e -> {

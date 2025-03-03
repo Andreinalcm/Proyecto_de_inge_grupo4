@@ -161,7 +161,7 @@ public class EventosYPublicaciones {
 
                 verBtn.addActionListener(e -> {
                     // Abrir la vista de detalles del evento
-                    VistaDeEvento vistaDeEvento = new VistaDeEvento(evento, frame, usuario);
+                    VistaDeEvento vistaDeEvento = new VistaDeEvento(evento, frame, usuario, controller.getRepositorio());
                     vistaDeEvento.getFrame().setVisible(true);
                 });
 

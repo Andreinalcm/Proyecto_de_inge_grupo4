@@ -1,14 +1,8 @@
 package main.View.gestionDeEventos;
 
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.*;
+import java.util.List; 
 import main.Controller.gestionDeEventos.GestorDeEventos;
 import main.Model.gestionDeEventos.Evento;
 import main.Model.gestionDeUsuario.Usuario;
@@ -28,7 +22,7 @@ public class MisEventos {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Pantalla completa
         frame.setLayout(new BorderLayout());
-        frame.getContentPane().setBackground(Color.BLACK); // Fondo negro
+        frame.getContentPane().setBackground(Color.BLACK);
 
         // Agregar el título centrado en la parte superior
         agregarTitulo();
@@ -49,7 +43,7 @@ public class MisEventos {
 
     private void crearPanelBotones() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-        panel.setBackground(Color.BLACK); // Fondo negro
+        panel.setBackground(Color.BLACK);
 
         JButton publicarEventoBtn = crearBoton("Publicar evento", new Color(51, 51, 51));
         JButton dashboardBtn = crearBoton("Dashboard", new Color(51, 51, 51));
@@ -94,37 +88,38 @@ public class MisEventos {
         };
 
         boton.setFont(new Font("Arial", Font.BOLD, 14));
-        boton.setForeground(Color.WHITE); // Texto en blanco
+        boton.setForeground(Color.WHITE);
         boton.setBackground(color);
         boton.setFocusPainted(false);
-        boton.setOpaque(false); // Fondo transparente
-        boton.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10)); // Padding
+        boton.setOpaque(false);
+        boton.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
         return boton;
     }
 
     private void crearPanelEventos() {
         eventosPanel = new JPanel();
         eventosPanel.setLayout(new BoxLayout(eventosPanel, BoxLayout.Y_AXIS));
-        eventosPanel.setBackground(Color.BLACK); // Fondo negro
-    
+        eventosPanel.setBackground(Color.BLACK);
+
         // Crear un panel contenedor con margen
         JPanel contenedorEventos = new JPanel(new BorderLayout());
-        contenedorEventos.setBackground(Color.BLACK); // Fondo negro
+        contenedorEventos.setBackground(Color.BLACK);
         contenedorEventos.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Margen de 20 píxeles en todos los lados
         contenedorEventos.add(eventosPanel, BorderLayout.CENTER);
-    
+
         JScrollPane scrollPane = new JScrollPane(contenedorEventos);
-        scrollPane.setBorder(BorderFactory.createEmptyBorder()); // Sin borde
-        scrollPane.getViewport().setBackground(Color.BLACK); // Fondo negro
-    
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        scrollPane.getViewport().setBackground(Color.BLACK);
+
         frame.add(scrollPane, BorderLayout.CENTER);
-    
-        // Leer el archivo y mostrar solo los eventos del usuario
+
+        // Leer los eventos desde el repositorio y mostrar solo los eventos del usuario
         actualizarEventosArea();
     }
 
     private void actualizarEventosArea() {
-        List<Evento> eventos = leerEventosDelArchivo();
+        // Obtener los eventos desde el GestorDeEventos, que a su vez los obtiene del repositorio
+        List<Evento> eventos = controller.getTodosLosEventos();
         eventosPanel.removeAll();
 
         for (Evento evento : eventos) {
@@ -132,13 +127,13 @@ public class MisEventos {
                 JPanel eventoPanel = new JPanel();
                 eventoPanel.setLayout(new BoxLayout(eventoPanel, BoxLayout.X_AXIS));
                 eventoPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
-                eventoPanel.setBackground(new Color(51, 51, 51)); // Fondo oscuro
+                eventoPanel.setBackground(new Color(51, 51, 51));
 
                 JLabel infoLabel = new JLabel("<html><b>" + evento.getTitulo() + "</b><br>"
                         + "Fecha Inicio: " + evento.getFechaHoraInicio() + "<br>"
                         + "Fecha Fin: " + evento.getFechaHoraFin() + "<br>"
                         + "Descripción: " + evento.getDescripcion() + "</html>");
-                infoLabel.setForeground(Color.WHITE); // Texto en blanco
+                infoLabel.setForeground(Color.WHITE);
                 eventoPanel.add(infoLabel);
 
                 JButton verBtn = crearBoton("Ver", new Color(51, 51, 51));
@@ -147,16 +142,20 @@ public class MisEventos {
 
                 verBtn.addActionListener(e -> {
                     // Abrir la vista de detalles del evento
-                    VistaDeEvento vistaDeEvento = new VistaDeEvento(evento, frame, usuario);
+                    VistaDeEvento vistaDeEvento = new VistaDeEvento(evento, frame, usuario,
+                            controller.getRepositorio());
                     vistaDeEvento.getFrame().setVisible(true);
                 });
 
                 editarBtn.addActionListener(e -> {
-                    // Lógica para editar el evento
+                    // Abrir la vista EditarEvento con los datos del evento seleccionado
+                    EditarEvento editarEvento = new EditarEvento(controller, usuario, evento);
+                    editarEvento.getFrame().setVisible(true);
+                    frame.setVisible(false); // Ocultar la vista actual
                 });
 
                 eliminarBtn.addActionListener(e -> {
-                    // Lógica para eliminar el evento
+                    // Falta implementar
                 });
 
                 eventoPanel.add(verBtn);
@@ -169,41 +168,6 @@ public class MisEventos {
 
         eventosPanel.revalidate();
         eventosPanel.repaint();
-    }
-
-    private List<Evento> leerEventosDelArchivo() {
-        List<Evento> eventos = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); // Formato de fecha
-    
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/Data/Evento.txt"))) {
-            String linea;
-            while ((linea = reader.readLine()) != null) {
-                String[] partes = linea.split(",");
-                if (partes.length == 7) { // Asegúrate de que hay 7 campos
-                    String titulo = partes[0].trim();
-                    String fechaInicioStr = partes[1].trim();
-                    String fechaFinStr = partes[2].trim();
-                    String ubicacion = partes[3].trim();
-                    String descripcion = partes[4].trim();
-                    String nombreUsuario = partes[5].trim();
-                    String estado = partes[6].trim();
-    
-                    // Convertir las fechas de String a LocalDateTime
-                    LocalDateTime fechaInicio = LocalDateTime.parse(fechaInicioStr, formatter);
-                    LocalDateTime fechaFin = LocalDateTime.parse(fechaFinStr, formatter);
-    
-                    // Crear el evento con el constructor correcto
-                    eventos.add(new Evento(titulo, fechaInicio, fechaFin, ubicacion, descripcion, nombreUsuario, estado));
-                }
-            }
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error al leer el archivo de eventos.", "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al procesar los datos del archivo.", "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
-        }
-        return eventos;
     }
 
     public JFrame getFrame() {
