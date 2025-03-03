@@ -1,0 +1,20 @@
+@startuml UC1 Registrar Usuario
+
+left to right direction
+
+Actor ":Usuario" as u
+
+control ":GestorDeUsuario" as gestor
+boundary ":FormularioDeRegistro" as reg
+entity ":Usuario" as user
+boundary ":FormularioDeInicioDeSesión" as log
+
+
+u-- reg: -->\n//1: IngresarDatosUsuario()// \n 
+reg ---- gestor : -->\n//2: EnviarDatosUsuario()// \n 
+gestor -- user : -->\n//4: CrearUsuario()// \n <--\n//5: RegistroExitoso()// \n -->\n//3: ValidarDatosUsuario()// \n 
+gestor--log: -->\n//5: MostrarInicioDeSesion()// \n -->\n//6: RegistroExitoso()//
+
+
+@enduml
+

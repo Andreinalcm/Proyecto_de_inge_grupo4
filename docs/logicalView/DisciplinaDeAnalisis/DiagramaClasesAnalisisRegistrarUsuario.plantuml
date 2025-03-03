@@ -1,0 +1,17 @@
+@startuml UC1 Registrar Usuario
+
+left to right direction
+
+Actor ":Usuario" as usuario
+
+boundary ":FormularioDeRegistro" as reg
+control ":GestorDeUsuarios" as gestor
+entity ":Usuario" as user
+boundary ":FormularioDeInicioDeSesión" as log
+
+usuario -- reg
+reg -- gestor
+gestor -- user
+gestor--log
+
+@enduml

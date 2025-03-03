@@ -1,0 +1,12 @@
+@startuml Registrar usuario
+
+hide empty description
+
+[*] --> EsperandoDatos
+EsperandoDatos --> ValidandoDatos : Usuario ingresa datos
+ValidandoDatos --> UsuarioRegistrado : Datos válidos
+ValidandoDatos --> ErrorValidacion : Datos inválidos
+ErrorValidacion --> EsperandoDatos : Reintentar
+UsuarioRegistrado --> [*] : Registro exitoso
+
+@enduml

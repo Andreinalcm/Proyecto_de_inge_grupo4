@@ -1,0 +1,137 @@
+@startuml Diagrama de Clases de Análisis
+
+class "FormularioDeInicioDeSesion" as FIS {
++ EnviarDatosUsuario() : Usuario
+}
+class "GestorDeInicioDeSesion" as GIS {
++ VerificarDatos() : void
++ MostrarDashboard() : void
++ InicioExitoso() : void
+}
+
+class "Dashboard" as DASH
+class "Usuario" as USU{
+-nombre : string
+-usuario : string
+-correo : string
+-clave : string
+
++ RegistroExitoso() : boolean
+}
+
+class "FormularioDeRegistro" as FDR {
+EnviarDatosUsuario() : Usuario
+}
+
+class "GestorDeUsuarios" as GDU {
++ ValidarDatos() : void
++ CrearUsuario() : Usuario
++ RegistroExitoso() : boolean
++ MostrarInicioDeSesion() : void
++ InicioExitoso() : void
++ObtenerUsuario(): Usuario
+}
+
+class "VistaCalendario" as VC {
++ObtenerCalendario(): Calendario
+}
+
+class "GestorDeCalendario" as GDC {
++ObtenerCalendario(): Calendario
++MandarCalendario(): Calendariio
+}
+class "GestorDeEventos" as GDE {
++ObtenerEventos(): List<Evento>
++EntregarEvento(): List<Evento>
+}
+
+
+class "Calendario" as C {
+-ListaDeEventos : List<Evento> 
+-ListaDePublicacion : List<Publicacion> 
+-Dia : List<Dia> 
+-Meses : List<Meses> 
+-Anios : List<Anios>
++ObtenerListaEventos(): List<Evento>
++EntregarCalendario(): Calendario
+}
+
+class "Evento" as E{
+-titulo : string
+-fecha_inicio : DataTime
+-fecha_fin : DataTime
+-categoria : string
+-descripcion : string
++EventoCreado(): boolean
++EntregarEventos(): List<Evento>
+}
+
+class "FormularioDeEventos" as FDE {
++EnviarDatosEnvento(): Evento
+}
+class "GestorDeEventos" as GDE {
++CrearEvento(): Evento
++AniadirACalendario(): void
+
+}
+
+class "FormularioDePublicacion" as FDP {
++ EnviarDatosPublicacion(): Publicacion
+}
+class "GestorDePublicaciones" as GDP {
++ CrearPublicacion()
+}
+class "Publicacion" as P {
+PublicacionCreada(): void
+}
+
+
+class "VistaDeEvento" as VDE{
++CambiarEstado(): void
+}
+
+class "VistaDePublicacion" as VDP{
++CambiarEstado(): void
+}
+
+
+class "GestorDeRevision" as GDR{
++EventoAprobado():  void
++PublicacionAprobada():  void
+}
+
+
+GDU "1" -- "*" USU
+FDR "*" --> "1" GDU
+
+
+FIS "*" --> "1" GIS
+GIS "1" -- "*" USU
+GIS "1" --> "1" DASH
+FIS "*" --> "1" GDU
+
+FDE "*" --> "1" GDE
+GDE "1" -- "*" E
+GDE "1" --> "*" C
+C "1" --> "1" GDC
+
+FDP "*" --> "1" GDP
+P "*" -- "1" GDP
+
+VC "*" --> "1" GDC
+
+
+GDR "1" -- "*" P
+GDR "1" --> "*" E
+
+VDE "*" --> "1" GDR
+VDP "*" -- "1" GDR
+
+DASH "1" -- "1" FDP
+DASH "1" -- "1" FDE
+DASH "1" -- "1" VC
+
+
+
+
+@enduml

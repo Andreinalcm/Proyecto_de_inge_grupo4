@@ -1,0 +1,113 @@
+@startuml Diagrama de clases
+
+class Usuario {
+    nombre
+    correo
+    rol
+    perfil
+    eventosCreados
+}
+
+class GrupoEstudio{}
+
+class GrupoDeportivo{}
+
+class GrupoCultural{}
+
+class Profesor{
+    PublicacionesCreadas
+}
+
+class Moderador{}
+
+class PersonalApoyo{}
+
+class Estudiante{
+    grupo
+}
+
+class Calendario {
+    eventos
+    meses
+    dias
+    anios
+}
+
+class Publicacion{
+    titulo
+    descripcion
+    fechaPublicacion
+    categoria
+    estado
+    creador
+    listaComentarios
+}
+
+class Ivestigacion{}
+
+class Proyecto{}
+
+class Experiencia{}
+
+class Evento {
+    titulo
+    descripcion
+    fechaHoraInicio
+    fechaHoraFin
+    ubicacion
+    categoria
+    estado
+    creador
+    listaComentarios
+}
+
+class Comentario {
+    texto
+    fechaCreacion
+    autor
+}
+
+class Institucional {}
+
+class DeExtension {}
+
+class Recreativo {}
+
+class Educativo {}
+
+class Notificacion {
+    mensaje
+    fechaEnvio
+    destinatario
+    leida
+}
+
+
+Usuario <|-- Profesor 
+Usuario <|-- Moderador
+Usuario <|--- PersonalApoyo 
+Usuario <|-- Estudiante
+
+Usuario "1..*" -- "0..*" Evento : gestiona
+Usuario "1..*" -- "0..*" Comentario : escribe
+Evento "1" o-- "0..*" Comentario : contiene
+Evento <|-- Institucional
+Evento <|-- DeExtension
+Evento <|-- Recreativo
+Evento <|-- Educativo
+Evento "1" -- "1...*" Notificacion : genera
+Usuario "1" --- "0...*" Notificacion : recibe
+Usuario "1" -- "1" Calendario : puede ver
+Calendario "1..*" o-- "0..*" Evento: muestra
+Profesor "1" -- "0..*" Publicacion: gestiona
+Moderador "1..*" -- "*" Publicacion: revisa
+Estudiante "1...*" o-- "0...*" GrupoEstudio: Pertenece
+Estudiante "1...*" o-- "0...*" GrupoDeportivo: Pertenece
+Estudiante "1...*" o-- "0...*" GrupoCultural: Pertenece
+Publicacion <|-- Ivestigacion
+Publicacion <|-- Proyecto
+Publicacion <|-- Experiencia
+Publicacion "1" o-- "0..*" Comentario : contiene
+Publicacion "1" --- "1...*" Notificacion : genera
+
+@enduml

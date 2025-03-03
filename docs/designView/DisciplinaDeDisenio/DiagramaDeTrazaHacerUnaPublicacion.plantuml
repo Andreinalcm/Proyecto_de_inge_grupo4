@@ -1,0 +1,46 @@
+@startuml UC7 Hacer Una Publicacion Traza
+
+left to right direction
+
+' Analisis
+
+Actor ":Moderador" as moderador
+Actor ":Profesor" as profe
+Actor ":Personal de apoyo" as pa
+
+boundary ":FormularioDePublicación" as form
+control ":GestorDePublicaciones" as gestor
+entity ":Publicación" as p
+
+profe -- form
+pa -- form
+moderador -- form
+form -- gestor
+gestor -- p
+
+'Diseño
+
+Actor ":Moderador" as moderador2
+Actor ":Profesor" as profesor
+Actor ":Personal de apoyo" as personalApoyo
+
+agent  "Publicacion" as publicacion
+agent "GestorDePublicacion" as gestorPublicacion
+agent "FormularioDePublicacion" as formularioPublicacion
+
+'Relaciones diseño
+
+moderador2 -- formularioPublicacion 
+profesor -- formularioPublicacion 
+personalApoyo -- formularioPublicacion 
+
+formularioPublicacion -- gestorPublicacion
+gestorPublicacion -- publicacion
+
+'Traza
+
+form ....> formularioPublicacion : traza
+gestor ....> gestorPublicacion : traza
+p ....> publicacion: traza
+
+@enduml

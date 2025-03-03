@@ -1,0 +1,37 @@
+@startuml UC3 Publicar evento
+
+left to right direction
+
+'Analisis
+Actor ":Usuario" as u
+boundary ":FormularioDeEventos" as form
+control ":GestorDeEventos" as gestor
+entity ":Evento" as event 
+entity ":Calendario" as c
+
+'Relaciones analisis
+u-- form
+form -- gestor 
+gestor -- event
+gestor -right- c
+
+'Diseño
+Actor "Usuario" as user
+agent FormularioDeEventos as DFE
+agent  "Evento" as devent 
+agent "Calendario" as dcal
+agent GestorDeEventos as DGE
+    
+'Relaciones diseño
+user -- DFE
+DGE -- dcal
+DGE -- devent
+DFE -- DGE
+
+'Trazas
+DFE <.... form : traza
+DGE <.. gestor : traza
+dcal <.. c : traza
+devent <.... event : traza
+
+@enduml
