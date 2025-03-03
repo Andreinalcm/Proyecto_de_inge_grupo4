@@ -10,6 +10,7 @@ import main.Model.gestionDeUsuario.Usuario;
 import main.View.gestionDeEventos.FormularioDeEventos;
 import main.View.gestionDeEventos.MisEventos;
 import main.View.gestionDeEventos.RevisarPublicacionesOEventos;
+import main.View.gestionDeNotificaciones.VerNotificaciones;
 import main.View.gestionDeEventos.EventosYPublicaciones; // Importar la nueva vista
 import main.View.gestionDePublicaciones.VentanaCrearPublicacion;
 import main.View.gestionDePublicaciones.VentanaPublicaciones;
@@ -18,6 +19,8 @@ import main.View.calendario.Calendario;
 import main.View.calendario.DayLabel;
 import main.Controller.gestorPublicaciones.GestorPublicaciones;
 import main.Model.gestionPublicacion.Publicacion;
+import main.Controller.gestionNotificacion.GestorNotificaciones;
+import main.View.gestionDeNotificaciones.VerNotificaciones; 
 
 public class Dashboard extends JFrame {
 
@@ -41,33 +44,36 @@ public class Dashboard extends JFrame {
         titulo.setHorizontalAlignment(SwingConstants.CENTER);
         titulo.setFont(new Font("Arial", Font.BOLD, 24));
         titulo.setForeground(Color.WHITE); // Letras blancas
-        titulo.setBorder(BorderFactory.createEmptyBorder(50, 0, 20, 0)); // Margen superior de 50 y inferior de 20
+        titulo.setBorder(BorderFactory.createEmptyBorder(50, 0, 20, 0));
         add(titulo, BorderLayout.NORTH);
 
         // Panel principal para los botones
         JPanel panelPrincipal = new JPanel();
         panelPrincipal.setLayout(new BoxLayout(panelPrincipal, BoxLayout.Y_AXIS));
-        panelPrincipal.setBackground(Color.BLACK); // Fondo negro
+        panelPrincipal.setBackground(Color.BLACK);
 
         // Panel para los botones principales
         JPanel panelBotones = new JPanel();
         panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS));
-        panelBotones.setBackground(Color.BLACK); // Fondo negro
+        panelBotones.setBackground(Color.BLACK);
 
         // Botones comunes a todos los usuarios
         JButton publicarEventoBtn = crearBoton("Publicar evento");
         JButton misEventosBtn = crearBoton("Mis eventos");
         JButton eventosPublicacionesBtn = crearBoton("Eventos y publicaciones");
         JButton revisarCalendarioBtn = crearBoton("Revisar calendario");
+        JButton verNotificacionesBtn = crearBoton("Ver notificaciones");
 
         panelBotones.add(Box.createRigidArea(new Dimension(0, 10)));
-        panelBotones.add(publicarEventoBtn); // Añade el JButton
+        panelBotones.add(publicarEventoBtn); 
         panelBotones.add(Box.createRigidArea(new Dimension(0, 10)));
-        panelBotones.add(misEventosBtn); // Añade el JButton
+        panelBotones.add(misEventosBtn);
         panelBotones.add(Box.createRigidArea(new Dimension(0, 10)));
-        panelBotones.add(eventosPublicacionesBtn); // Añade el JButton
+        panelBotones.add(eventosPublicacionesBtn);
         panelBotones.add(Box.createRigidArea(new Dimension(0, 10)));
-        panelBotones.add(revisarCalendarioBtn); // Añade el JButton
+        panelBotones.add(revisarCalendarioBtn); 
+        panelBotones.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelBotones.add(verNotificacionesBtn);
 
         // Botones adicionales según el rol
         if (usuario.getRol().equals("Profesor") || usuario.getRol().equals("Apoyo")
@@ -178,12 +184,29 @@ public class Dashboard extends JFrame {
             this.setVisible(true); // Oculta el Dashboard
         });
 
+        // ActionListener para el botón "Ver notificaciones"
+        verNotificacionesBtn.addActionListener(e -> {
+
+            /* 
+            Descometar para que sirva el boton de notificaciones
+            VerNotificaciones verNotificaciones = new VerNotificaciones(usuario);
+            verNotificaciones.setVisible(true);
+            this.setVisible(false); // Oculta el Dashboard
+
+            */
+        });
+
         cerrarSesionBtn.addActionListener(e -> {
             SwingUtilities.invokeLater(() -> new LoginFrame());
             dispose();
         });
 
         setVisible(true);
+
+        // Mostrar notificaciones después de que el dashboard esté construido
+        SwingUtilities.invokeLater(() -> {
+            GestorNotificaciones.getInstancia().mostrarNotificacionesParaUsuario(usuario);
+        });
     }
 
     private JButton crearBoton(String texto) {

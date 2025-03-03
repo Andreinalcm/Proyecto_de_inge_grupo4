@@ -1,12 +1,6 @@
 package main.View.gestionDeEventos;
 
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 import main.Controller.gestionDeEventos.GestorDeEventos;
@@ -24,7 +18,7 @@ public class RevisarPublicacionesOEventos {
     public RevisarPublicacionesOEventos(GestorDeEventos controller, Usuario usuario) {
         this.controller = controller;
         this.usuario = usuario;
-        frame = new JFrame("Publicaciones/Eventos por revisar");
+        frame = new JFrame("Revisar publicaciones o eventos");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH); // Pantalla completa
         frame.setLayout(new BorderLayout());
@@ -111,88 +105,54 @@ public class RevisarPublicacionesOEventos {
 
         frame.add(scrollPane, BorderLayout.CENTER);
 
-        // Leer el archivo y mostrar solo los eventos y publicaciones pendientes
+        // Leer los eventos desde el repositorio y mostrar solo los eventos pendientes
         actualizarEventosArea();
     }
 
     private void actualizarEventosArea() {
-    List<Evento> eventos = leerEventosDelArchivo();
-    eventosPanel.removeAll();
+        // Obtener los eventos desde el GestorDeEventos, que a su vez los obtiene del repositorio
+        List<Evento> eventos = controller.getTodosLosEventos(); // Ahora esto funciona correctamente
+        eventosPanel.removeAll();
 
-    for (Evento evento : eventos) {
-        if (evento.getEstado().equals("Pendiente")) {
-            JPanel eventoPanel = new JPanel();
-            eventoPanel.setLayout(new BoxLayout(eventoPanel, BoxLayout.X_AXIS));
-            eventoPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
-            eventoPanel.setBackground(new Color(51, 51, 51)); // Fondo oscuro
+        for (Evento evento : eventos) {
+            if (evento.getEstado().equals("Pendiente")) {
+                JPanel eventoPanel = new JPanel();
+                eventoPanel.setLayout(new BoxLayout(eventoPanel, BoxLayout.X_AXIS));
+                eventoPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
+                eventoPanel.setBackground(new Color(51, 51, 51)); // Fondo oscuro
 
-            JLabel infoLabel = new JLabel("<html><b>" + evento.getTitulo() + "</b><br>"
-                    + "Fecha Inicio: " + evento.getFechaHoraInicio() + "<br>"
-                    + "Fecha Fin: " + evento.getFechaHoraFin() + "<br>"
-                    + "Descripción: " + evento.getDescripcion() + "</html>");
-            infoLabel.setForeground(Color.WHITE); // Texto en blanco
-            eventoPanel.add(infoLabel);
+                JLabel infoLabel = new JLabel("<html><b>" + evento.getTitulo() + "</b><br>"
+                        + "Fecha Inicio: " + evento.getFechaHoraInicio() + "<br>"
+                        + "Fecha Fin: " + evento.getFechaHoraFin() + "<br>"
+                        + "Descripción: " + evento.getDescripcion() + "</html>");
+                infoLabel.setForeground(Color.WHITE); // Texto en blanco
+                eventoPanel.add(infoLabel);
 
-            JButton aprobarBtn = crearBoton("Aprobar", new Color(51, 51, 51));
-            JButton rechazarBtn = crearBoton("Rechazar", new Color(51, 51, 51));
+                JButton aprobarBtn = crearBoton("Aprobar", new Color(51, 51, 51));
+                JButton rechazarBtn = crearBoton("Rechazar", new Color(51, 51, 51));
 
-            aprobarBtn.addActionListener(e -> {
-                // Lógica para aprobar el evento
-                controller.aprobarEvento(evento); // Cambia a aprobarEvento
-                actualizarEventosArea(); // Actualizar la lista después de aprobar
-            });
+                aprobarBtn.addActionListener(e -> {
+                    // Lógica para aprobar el evento
+                    controller.aprobarEvento(evento); // Cambia a aprobarEvento
+                    actualizarEventosArea(); // Actualizar la lista después de aprobar
+                });
 
-            rechazarBtn.addActionListener(e -> {
-                // Lógica para rechazar el evento
-                controller.rechazarEvento(evento); // Cambia a rechazarEvento
-                actualizarEventosArea(); // Actualizar la lista después de rechazar
-            });
+                rechazarBtn.addActionListener(e -> {
+                    // Lógica para rechazar el evento
+                    controller.rechazarEvento(evento); // Cambia a rechazarEvento
+                    actualizarEventosArea(); // Actualizar la lista después de rechazar
+                });
 
-            eventoPanel.add(aprobarBtn);
-            eventoPanel.add(rechazarBtn);
+                eventoPanel.add(aprobarBtn);
+                eventoPanel.add(rechazarBtn);
 
-            eventosPanel.add(eventoPanel);
-        }
-    }
-
-    eventosPanel.revalidate();
-    eventosPanel.repaint();
-}
-
-private List<Evento> leerEventosDelArchivo() {
-    List<Evento> eventos = new ArrayList<>();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); // Formato de fecha
-
-    try (BufferedReader reader = new BufferedReader(new FileReader("src/main/Data/Evento.txt"))) {
-        String linea;
-        while ((linea = reader.readLine()) != null) {
-            String[] partes = linea.split(",");
-            if (partes.length == 7) { // Asegúrate de que hay 7 campos
-                String titulo = partes[0].trim();
-                String fechaInicioStr = partes[1].trim();
-                String fechaFinStr = partes[2].trim();
-                String ubicacion = partes[3].trim();
-                String descripcion = partes[4].trim();
-                String nombreUsuario = partes[5].trim();
-                String estado = partes[6].trim();
-
-                // Convertir las fechas de String a LocalDateTime
-                LocalDateTime fechaInicio = LocalDateTime.parse(fechaInicioStr, formatter);
-                LocalDateTime fechaFin = LocalDateTime.parse(fechaFinStr, formatter);
-
-                // Crear el evento con el constructor correcto
-                eventos.add(new Evento(titulo, fechaInicio, fechaFin, ubicacion, descripcion, nombreUsuario, estado));
+                eventosPanel.add(eventoPanel);
             }
         }
-    } catch (IOException e) {
-        JOptionPane.showMessageDialog(null, "Error al leer el archivo de eventos.", "Error", JOptionPane.ERROR_MESSAGE);
-        e.printStackTrace();
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Error al procesar los datos del archivo.", "Error", JOptionPane.ERROR_MESSAGE);
-        e.printStackTrace();
+
+        eventosPanel.revalidate();
+        eventosPanel.repaint();
     }
-    return eventos;
-}
 
     public JFrame getFrame() {
         return frame;
