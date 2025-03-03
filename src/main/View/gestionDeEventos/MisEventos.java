@@ -155,7 +155,20 @@ public class MisEventos {
                 });
 
                 eliminarBtn.addActionListener(e -> {
-                    // Falta implementar
+                    // Confirmar si el usuario realmente desea eliminar el evento
+                    int confirmacion = JOptionPane.showConfirmDialog(
+                        frame,
+                        "¿Estás seguro de que quieres eliminar este evento?",
+                        "Confirmar eliminación",
+                        JOptionPane.YES_NO_OPTION
+                    );
+                
+                    if (confirmacion == JOptionPane.YES_OPTION) {
+                        // Eliminar el evento del repositorio
+                        controller.getRepositorio().eliminarEvento(evento);
+                        // Actualizar la lista de eventos en la interfaz
+                        actualizarEventosArea();
+                    }
                 });
 
                 eventoPanel.add(verBtn);
