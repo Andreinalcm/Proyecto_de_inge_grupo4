@@ -8,7 +8,4 @@ fffffff,2025-10-10 10:00,2025-10-10 11:00,hola,ddf,Andreina Lacruz,Pendiente
 reunion,2026-09-17 17:30,2026-09-17 20:00,aula 2,aula2,Andreina Lacruz,Pendiente
 notificaciones,2025-05-10 10:00,2025-05-10 11:00,xxxxx,xxxxxx,Andreina Lacruz,Aprobado
 no se,2026-09-17 21:00,2026-09-17 22:00,no se,no se,Manuel,Aprobado
-123,2026-08-17 21:00,2026-08-17 22:00,123,123,Andreina Lacruz,Pendiente
-prueba1,2026-08-17 21:00,2026-08-17 22:00,prueba1,prueba1,Andreina Lacruz,Aprobado
-555555555,2026-08-17 21:00,2026-08-17 22:00,5555555555,5555555,Andreina Lacruz,Rechazado
 mmmmmmmmmmm,2026-08-17 10:00,2026-08-17 21:00,mmmmmmmmm,mmmmmmmmmmm,Luis,Aprobado
