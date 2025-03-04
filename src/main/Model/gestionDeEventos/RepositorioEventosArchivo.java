@@ -29,6 +29,12 @@ public class RepositorioEventosArchivo implements RepositorioEventos {
     }
 
     @Override
+    public void eliminarEvento(Evento evento) {
+        eventos.remove(evento); // Eliminar el evento de la lista
+        guardarEnArchivo(); // Guardar los cambios en el archivo
+    }
+
+    @Override
     public List<Evento> getTodosLosEventos() {
         return eventos;
     }

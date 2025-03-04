@@ -7,4 +7,5 @@ public interface RepositorioEventos {
     void guardarEvento(Evento evento, Usuario usuario);
     List<Evento> getTodosLosEventos();
     void guardarEnArchivo();
+    void eliminarEvento(Evento evento);
 }
