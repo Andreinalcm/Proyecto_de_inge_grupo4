@@ -12,3 +12,4 @@ J,J,J,J,Estudiante
 ET,ET,ET,ET,Profesor
 usuario,contraseña,nombre,correo@gmail.com,Profesor
 Mario,Marioc,Mario Bros,Mario@hotmail.com,Profesor
+123,123,123,123,Moderador

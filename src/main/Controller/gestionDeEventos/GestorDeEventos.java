@@ -25,6 +25,11 @@ public class GestorDeEventos {
         return instancia;
     }
 
+    // Método para obtener el repositorio
+    public RepositorioEventos getRepositorio() {
+        return repositorio;
+    }
+
     public boolean crearEvento(String titulo, String descripcion, String fechaHoraInicioStr, String fechaHoraFinStr, String ubicacion, Usuario creador, String estado) {
         try {
             // Validar campos vacíos
@@ -103,11 +108,13 @@ public class GestorDeEventos {
 
     public void aprobarEvento(Evento evento) {
         evento.setEstado("Aprobado");
-        repositorio.actualizarEvento(evento); // Asegúrate de que este método esté implementado en RepositorioEventos
+        repositorio.guardarEnArchivo();
+        //repositorio.actualizarEvento(evento); // Asegúrate de que este método esté implementado en RepositorioEventos
     }
     
     public void rechazarEvento(Evento evento) {
         evento.setEstado("Rechazado");
-        repositorio.actualizarEvento(evento); // Asegúrate de que este método esté implementado en RepositorioEventos
+        repositorio.guardarEnArchivo();
+        //repositorio.actualizarEvento(evento); // Asegúrate de que este método esté implementado en RepositorioEventos
     }
 }

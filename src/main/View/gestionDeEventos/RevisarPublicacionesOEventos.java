@@ -118,6 +118,7 @@ public class RevisarPublicacionesOEventos {
         eventosPanel.setLayout(new BoxLayout(eventosPanel, BoxLayout.Y_AXIS));
         eventosPanel.setBackground(Color.BLACK);
         eventosPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        eventosPanel.setPreferredSize(new Dimension(eventosPanel.getPreferredSize().width, 500));
 
         actualizarEventosArea();
     }
@@ -127,12 +128,14 @@ public class RevisarPublicacionesOEventos {
         publicacionesPanel.setLayout(new BoxLayout(publicacionesPanel, BoxLayout.Y_AXIS));
         publicacionesPanel.setBackground(Color.BLACK);
         publicacionesPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        publicacionesPanel.setPreferredSize(new Dimension(eventosPanel.getPreferredSize().width, 500));
 
         actualizarPublicacionesArea();
     }
 
     private void actualizarEventosArea() {
-        List<Evento> eventos = leerEventosDelArchivo();
+        // Obtener los eventos desde el GestorDeEventos, que a su vez los obtiene del repositorio
+        List<Evento> eventos = controller.getTodosLosEventos(); // Ahora esto funciona correctamente
         eventosPanel.removeAll();
 
         for (Evento evento : eventos) {
@@ -140,30 +143,41 @@ public class RevisarPublicacionesOEventos {
                 JPanel eventoPanel = new JPanel();
                 eventoPanel.setLayout(new BoxLayout(eventoPanel, BoxLayout.X_AXIS));
                 eventoPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
-                eventoPanel.setBackground(new Color(51, 51, 51));
+                eventoPanel.setBackground(new Color(51, 51, 51)); // Fondo oscuro
+                eventoPanel.setPreferredSize(new Dimension(eventoPanel.getPreferredSize().width, 100));
 
                 JLabel infoLabel = new JLabel("<html><b>" + evento.getTitulo() + "</b><br>"
-                        + "Fecha Inicio: " + evento.getFechaHoraInicio() + "<br>"
-                        + "Fecha Fin: " + evento.getFechaHoraFin() + "<br>"
-                        + "Descripción: " + evento.getDescripcion() + "</html>");
-                infoLabel.setForeground(Color.WHITE);
+                        + "Creador: " + evento.getCreador() + "<br>"
+                         + "</html>");
+                infoLabel.setForeground(Color.WHITE); // Texto en blanco
                 eventoPanel.add(infoLabel);
 
+                JButton verBtn = crearBoton("Ver", new Color(51, 51, 51));
                 JButton aprobarBtn = crearBoton("Aprobar", new Color(51, 51, 51));
                 JButton rechazarBtn = crearBoton("Rechazar", new Color(51, 51, 51));
 
                 aprobarBtn.addActionListener(e -> {
-                    controller.aprobarEvento(evento);
-                    actualizarEventosArea();
+                    // Lógica para aprobar el evento
+                    controller.aprobarEvento(evento); // Cambia a aprobarEvento
+                    actualizarEventosArea(); // Actualizar la lista después de aprobar
                 });
 
                 rechazarBtn.addActionListener(e -> {
-                    controller.rechazarEvento(evento);
-                    actualizarEventosArea();
+                    // Lógica para rechazar el evento
+                    controller.rechazarEvento(evento); // Cambia a rechazarEvento
+                    actualizarEventosArea(); // Actualizar la lista después de rechazar
+                });
+
+                verBtn.addActionListener(e -> {
+                    // Abrir la vista de detalles del evento
+                    VistaDeEvento vistaDeEvento = new VistaDeEvento(evento, frame, usuario,
+                            controller.getRepositorio());
+                    vistaDeEvento.getFrame().setVisible(true);
                 });
 
                 eventoPanel.add(aprobarBtn);
                 eventoPanel.add(rechazarBtn);
+                eventoPanel.add(verBtn);
 
                 eventosPanel.add(eventoPanel);
             }
@@ -183,6 +197,7 @@ public class RevisarPublicacionesOEventos {
                 publicacionPanel.setLayout(new BoxLayout(publicacionPanel, BoxLayout.X_AXIS));
                 publicacionPanel.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
                 publicacionPanel.setBackground(new Color(51, 51, 51));
+                publicacionPanel.setPreferredSize(new Dimension(publicacionPanel.getPreferredSize().width, 100));
     
                 // Modificación aquí: Eliminar la línea del estado
                 JLabel infoLabel = new JLabel("<html><b>" + publicacion.getTitulo() + "</b><br>"
@@ -444,38 +459,6 @@ public class RevisarPublicacionesOEventos {
         }
     }
 
-    private List<Evento> leerEventosDelArchivo() {
-        List<Evento> eventos = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/Data/Evento.txt"))) {
-            String linea;
-            while ((linea = reader.readLine()) != null) {
-                String[] partes = linea.split(",");
-                if (partes.length == 7) {
-                    String titulo = partes[0].trim();
-                    String fechaInicioStr = partes[1].trim();
-                    String fechaFinStr = partes[2].trim();
-                    String ubicacion = partes[3].trim();
-                    String descripcion = partes[4].trim();
-                    String nombreUsuario = partes[5].trim();
-                    String estado = partes[6].trim();
-
-                    LocalDateTime fechaInicio = LocalDateTime.parse(fechaInicioStr, formatter);
-                    LocalDateTime fechaFin = LocalDateTime.parse(fechaFinStr, formatter);
-
-                    eventos.add(new Evento(titulo, fechaInicio, fechaFin, ubicacion, descripcion, nombreUsuario, estado));
-                }
-            }
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error al leer el archivo de eventos.", "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al procesar los datos del archivo.", "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
-        }
-        return eventos;
-    }
 
     public JFrame getFrame() {
         return frame;

@@ -22,6 +22,7 @@ import main.Controller.gestorPublicaciones.GestorPublicaciones;
 import main.Model.gestionPublicacion.Publicacion;
 import main.View.gestionDePublicaciones.MisPublicaciones;
 import main.View.gestionInicioSesion.LoginVista;
+import main.View.gestionDeNotificaciones.VerNotificaciones;
 
 public class Dashboard extends JFrame {
 
@@ -67,6 +68,7 @@ public class Dashboard extends JFrame {
         JButton misEventosBtn = crearBoton("Mis eventos");
         JButton eventosPublicacionesBtn = crearBoton("Eventos y publicaciones");
         JButton revisarCalendarioBtn = crearBoton("Revisar calendario");
+        JButton verNotificacionesBtn = crearBoton("Ver notificaciones");
 
         panelBotones.add(Box.createRigidArea(new Dimension(0, 10)));
         panelBotones.add(publicarEventoBtn); // Añade el JButton
@@ -76,6 +78,8 @@ public class Dashboard extends JFrame {
         panelBotones.add(eventosPublicacionesBtn); // Añade el JButton
         panelBotones.add(Box.createRigidArea(new Dimension(0, 10)));
         panelBotones.add(revisarCalendarioBtn); // Añade el JButton
+        panelBotones.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelBotones.add(verNotificacionesBtn);
 
         // Botones adicionales según el rol
         if (usuario.getRol().equals("Profesor") || usuario.getRol().equals("Apoyo")
@@ -193,6 +197,19 @@ public class Dashboard extends JFrame {
 
             this.setVisible(true); // Oculta el Dashboard
         });
+
+        // ActionListener para el botón "Ver notificaciones"
+        verNotificacionesBtn.addActionListener(e -> {
+
+            /* 
+            Descometar para que sirva el boton de notificaciones
+            VerNotificaciones verNotificaciones = new VerNotificaciones(usuario);
+            verNotificaciones.setVisible(true);
+            this.setVisible(false); // Oculta el Dashboard
+
+            */
+        });
+
 
         cerrarSesionBtn.addActionListener(e -> {
             SwingUtilities.invokeLater(() -> new LoginVista());

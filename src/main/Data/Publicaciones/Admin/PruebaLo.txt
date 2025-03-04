@@ -3,4 +3,4 @@ PruebaLo
 PruebaLo
 Admin
 PruebaLo
-Pendiente
+Aprobado

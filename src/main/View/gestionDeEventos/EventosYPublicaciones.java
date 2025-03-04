@@ -180,9 +180,8 @@ public class EventosYPublicaciones {
                 eventoPanel.setBackground(new Color(51, 51, 51));
 
                 JLabel infoLabel = new JLabel("<html><b>" + evento.getTitulo() + "</b><br>"
-                        + "Fecha Inicio: " + evento.getFechaHoraInicio() + "<br>"
-                        + "Fecha Fin: " + evento.getFechaHoraFin() + "<br>"
-                        + "Descripción: " + evento.getDescripcion() + "</html>");
+                        + "Creador: " + evento.getCreador() + "<br>"
+                         + "</html>");
                 infoLabel.setForeground(Color.WHITE);
                 eventoPanel.add(infoLabel);
 
@@ -194,7 +193,7 @@ public class EventosYPublicaciones {
                 });
 
                 verBtn.addActionListener(e -> {
-                    VistaDeEvento vistaDeEvento = new VistaDeEvento(evento, frame, usuario);
+                    VistaDeEvento vistaDeEvento = new VistaDeEvento(evento, frame, usuario, controller.getRepositorio());
                     vistaDeEvento.getFrame().setVisible(true);
                 });
 
@@ -337,7 +336,7 @@ public class EventosYPublicaciones {
         List<Evento> eventos = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/Data/Evento.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("main/Data/Evento.txt"))) {
             String linea;
             while ((linea = reader.readLine()) != null) {
                 String[] partes = linea.split(",");

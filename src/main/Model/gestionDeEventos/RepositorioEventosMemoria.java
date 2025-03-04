@@ -19,7 +19,13 @@ public class RepositorioEventosMemoria implements RepositorioEventos {
     }
 
     @Override
-    public void actualizarEvento(Evento evento) {
-        // No es necesario actualizar en memoria, ya que los objetos se modifican directamente
+    public void guardarEnArchivo() {
+        // No es necesario hacer nada, ya que los eventos están en memoria
     }
+
+    @Override
+public void eliminarEvento(Evento evento) {
+    eventos.remove(evento); // Eliminar el evento de la lista
+    guardarEnArchivo(); // Guardar los cambios en el archivo
+}
 }
