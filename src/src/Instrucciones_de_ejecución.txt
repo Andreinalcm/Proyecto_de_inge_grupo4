@@ -1,0 +1,11 @@
+Ejecutar el programa Main.java unicamente desde la carpeta src
+
+Formas de ejecutar:
+
+Abrir VSCode (o el IDE de preferencia) en la carpeta src, entonces:
+
+1)En la terminal ejecutar el comando: java main/Main.java
+
+Ó
+
+2)Ejecutar RUN Java y seleccionar la clase Main.java como la clase principal

@@ -1,0 +1,15 @@
+Prueba,Prueba,hola@,123456
+Admin,Admin,Admin@gmail.com,Admin,Moderador
+Usuario,Usuario,Usuario@gmail.com,Usuario,Estudiante
+a123,Andreina Lacruz,andreina@gmail.com,123,Moderador
+g123,Glen,glen@gmail.com,123,Profesor
+L123,Luis,luis@gmail.com,123,Estudiante
+m123,Manuel,manuel@gmail.com,123,Personal de apoyo
+f123,Fabiana González,fabiana@gmail.com,123,Moderador
+PruebaTU,PruebaTE,PruebaT,Prueba50@gmail.com,Profesor
+CD,CD,CD,CD,Profesor
+J,J,J,J,Estudiante
+ET,ET,ET,ET,Profesor
+usuario,contraseña,nombre,correo@gmail.com,Profesor
+Mario,Marioc,Mario Bros,Mario@hotmail.com,Profesor
+123,123,123,123,Moderador
