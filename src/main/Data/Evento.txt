@@ -1,0 +1,11 @@
+Torneo de beisball,2025-10-10 10:00,2025-11-10 12:10,Poliedrito,Juego amistoso,Fabiana González,Pendiente
+Las plecopteras,2025-12-10 11:00,2025-12-10 12:10,Auditorio Manuel Bemporad,Charla educativa sobre las plecopteras,Fabiana González,Pendiente
+Sumas parciales no consecutivas,2025-10-10 11:00,2025-11-10 11:00,Auditorio Manuel Bemporad,Charla dicatada por el profesor Eduardo Aponte,Andreina Lacruz,Rechazado
+IA en la ciencia,2025-10-10 11:00,2025-11-10 11:00,Auditorio Tobías Lasser,Charla dicatada por el profesor Luis Aponte,Andreina Lacruz,Aprobado
+Programación con Python impulsada por promts de IA,2025-05-10 09:00,2025-05-10 11:00,Laboratorio CCPD Escuela de computación,El postgrado en Ciencias de la Computación invita a participar en el curso de ampliación (acreditable) Programación con Python impulsada por prompts de IA El curso será dictado por el Dr Andrés Sanoja Director de la Escuela de Computación Doctor en informática Université La Sorbonne,Andreina Lacruz,Rechazado
+fffffff,2025-10-10 10:00,2025-10-10 11:00,hola,ddf,Andreina Lacruz,Aprobado
+123224,2025-12-10 11:00,2025-12-10 12:00,erger,eggeg,Fabiana González,Rechazado
+prueba,2025-12-10 11:00,2025-12-10 12:00,prueba,prueba,123,Aprobado
+1235,2026-08-17 10:00,2026-08-17 11:00,1235,1235,123,Aprobado
+PruebaNotificacionE,2025-03-04 22:20,2025-04-04 22:20,PruebaNotificacionE,PruebaNotificacionE,nombre,Aprobado
+EventoCalendario,2025-03-04 23:20,2025-04-04 23:20,EventoCalendario,EventoCalendario,Admin@gmail.com,Pendiente
