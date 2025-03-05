@@ -3,4 +3,4 @@ JLabel
 JLabel
 CD
 JLabel
-Pendiente
+Aprobado

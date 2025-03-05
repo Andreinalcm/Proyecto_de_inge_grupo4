@@ -300,18 +300,34 @@ public class EventosYPublicaciones {
         List<Publicacion> publicaciones = new ArrayList<>();
         File directorio = new File(directorioPublicaciones);
         File[] archivos = directorio.listFiles();
-
+    
         if (archivos != null) {
             for (File archivo : archivos) {
                 if (archivo.isFile() && archivo.getName().endsWith(".txt")) {
-                    Publicacion publicacion = leerPublicacionDesdeArchivo(archivo);
-                    if (publicacion != null) {
-                        publicaciones.add(publicacion);
+                    if (ultimaLineaEsAprobado(archivo)) { // Verificar la última línea
+                        Publicacion publicacion = leerPublicacionDesdeArchivo(archivo);
+                        if (publicacion != null) {
+                            publicaciones.add(publicacion);
+                        }
                     }
                 }
             }
         }
         return publicaciones;
+    }
+    
+    private boolean ultimaLineaEsAprobado(File archivo) {
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+            String ultimaLinea = null;
+            String lineaActual;
+            while ((lineaActual = br.readLine()) != null) {
+                ultimaLinea = lineaActual;
+            }
+            return ultimaLinea != null && ultimaLinea.trim().equalsIgnoreCase("Aprobado");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     private Publicacion leerPublicacionDesdeArchivo(File archivo) {
