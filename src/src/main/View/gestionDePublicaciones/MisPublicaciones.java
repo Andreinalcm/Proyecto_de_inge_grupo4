@@ -153,6 +153,7 @@ public class MisPublicaciones extends JFrame {
         botonVer.addActionListener(e -> {
             String nombreArchivo = publicacion.getTitulo() + ".txt"; // Obtener el nombre del archivo
             SwingUtilities.invokeLater(() -> new MostrarPublicacion(nombreArchivo, gestor, usuario));
+            dispose();
         });
 
         botonEditar.addActionListener(e -> {
@@ -164,10 +165,7 @@ public class MisPublicaciones extends JFrame {
 
                 if (publicacion2 != null) {
                     SwingUtilities.invokeLater(() -> {
-                        /* 
-                        EditarPublicacion editarPublicacion = new EditarPublicacion(publicacion2, gestor, usuario);
-                        editarPublicacion.setVisible(true);
-                        */
+
                         SwingUtilities.invokeLater(() -> new EditarPublicacion(publicacion2, gestor, usuario));
                         dispose();
                     });

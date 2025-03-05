@@ -170,27 +170,6 @@ public class Dashboard extends JFrame {
         });
 
         // ActionListener para el botón "Revisar calendario"
-        /* 
-        revisarCalendarioBtn.addActionListener(e -> {
-            // Crear la ventana
-            JFrame ventana3 = new JFrame("Calendario");
-            // Configurar el tamaño de la ventana
-            ventana3.setSize(900, 500);
-            // Centrar la ventana en la pantalla
-            ventana3.setLocationRelativeTo(null);
-            // Establecer el color de fondo del contenido de la ventana
-            ventana3.getContentPane().setBackground(Color.black);
-            JPanel mainPanel = new JPanel(new GridLayout(1, 2, 0, 0));
-            mainPanel.add(new Calendario(2025, 2));
-            ventana3.getContentPane().add(mainPanel);
-            // Hacer visible la ventana
-            ventana3.setVisible(true);
-            // Configurar la operación de cierre de la ventana
-            ventana3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-            this.setVisible(true); // Oculta el Dashboard
-        });
-        */
 
         revisarCalendarioBtn.addActionListener(e -> {
             setTitle("Calendario");

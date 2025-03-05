@@ -85,14 +85,18 @@ public class MostrarPublicacion extends JFrame {
         //Aciones de los botones
 
         misPublicacionesButton.addActionListener(e -> {
+            //Volver a Mis Publicaciones
+            SwingUtilities.invokeLater(() -> new MisPublicaciones(gestor, usuario));
             dispose();
         });
+
         comentarBoton.addActionListener(e -> {
             String comentario = JOptionPane.showInputDialog(this, "Escribe tu comentario:");
             
                 gestorComentarios.guardarComentario(directorioComentarios, nombreArchivo, usuario.getUsuario(), comentario);
             
         });
+
         comentariosBoton.addActionListener(e -> gestorComentarios.mostrarComentarios(directorioComentarios, nombreArchivo));
     }
     

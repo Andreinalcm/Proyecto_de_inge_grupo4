@@ -174,6 +174,10 @@ public class EditarPublicacion extends JFrame {
         // ActionListener para el botón "Cancelar"
         BotonCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
+                //Volver a mis Publicaciones
+                SwingUtilities.invokeLater(() -> new MisPublicaciones(gestor, usuario));
+
                 //cerrar la ventana actual
                 dispose();
             }
@@ -199,6 +203,9 @@ public class EditarPublicacion extends JFrame {
 
                     // Actualizar todos los archivos correspondientes
                     actualizarTodosLosArchivos(publicacionActualizada);
+
+                    //Volver a Mis Publicaciones
+                    SwingUtilities.invokeLater(() -> new MisPublicaciones(gestor, usuario));
 
                     // Cerrar la ventana actual
                     dispose();

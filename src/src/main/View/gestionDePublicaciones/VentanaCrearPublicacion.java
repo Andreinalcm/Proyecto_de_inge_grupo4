@@ -137,7 +137,7 @@ public class VentanaCrearPublicacion extends JFrame {
         BotonPublicar = new JButton("Hacer Publicacion");
         BotonCancelar = new JButton("Anular Publicacion");
         BotonMisPublicaciones = new JButton("Mis Publicaciones");
-        dashboardBtn = new JButton("DashboardBtn");
+        dashboardBtn = new JButton("Dashboard");
 
         // Aplicar el estilo 3D a los botones
         ButtonUtils.styleButton3D(BotonPublicar);
@@ -211,6 +211,10 @@ public class VentanaCrearPublicacion extends JFrame {
                         Publicacion publicacionActualizada = new Publicacion(titulo, fechaDePublicacion, categoria, descripcion, creador, estado);
                         // Guardar en archivo
                         guardarOActualizarArchivo(publicacionActualizada, true);
+
+                        //Volver al dashboard
+                        SwingUtilities.invokeLater(() -> new Dashboard(usuario));
+
                         // Cerrar la ventana actual
                         dispose();
 
