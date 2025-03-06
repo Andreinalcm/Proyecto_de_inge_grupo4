@@ -1,0 +1,4 @@
+Partido de tenis de mesa,2025-05-03 11:00,2025-05-03 15:00,Plaza la Langosta,Partido,Admin,Aprobado
+Reunion de estudio,2025-03-06 15:00,2025-03-06 17:00,Aula 03,Estudiar para el quiz de ingenieria de software,Estudiante,Aprobado
+Examen final,2025-03-15 09:00,2025-03-15 11:00,Aula 07,Modelo de Examen final,Profesor,Aprobado
+Pruebas de servidor,2025-03-14 11:00,2025-03-14 12:00,Ninguna,Pruebas rutinarias de servidor,Moderador,Aprobado

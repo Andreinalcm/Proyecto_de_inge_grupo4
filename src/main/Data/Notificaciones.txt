@@ -1,0 +1,18 @@
+EVENTO,Taller de Programación Java,Ana García,2024-05-15 14:30
+PUBLICACION,Guía de Estudio para Matemáticas,Juan Pérez,2024-04-10 09:00
+EVENTO,Conferencia de Inteligencia Artificial,Carlos Ruiz,2024-06-20 10:00
+PUBLICACION,Resumen del Semestre,María López,2024-04-12 15:45
+EVENTO,Seminario de Desarrollo Web,Pedro Sánchez,2024-05-25 11:00
+PUBLICACION,Consejos para Exámenes Finales,Laura Torres,2024-04-15 08:30 EVENTO,Torneo de beisball,Fabiana González,2025-10-10 10:00
+EVENTO,Las plecopteras,Fabiana González,2025-12-10 11:00
+EVENTO,HOLA,123,2025-03-18 23:10
+PUBLICACION,Todo quesudo ando,Ando caliente,2025-03-18 23:50
+EVENTO,ME CAGO EN TU CARA,CD,2025-03-18 23:50
+EVENTO,fcsadcsdfx,CD,2025-03-19 23:50
+EVENTO,PruebaNotificacionE,nombre,2025-03-04 22:20
+EVENTO,PruebaCalendario2,Admin@gmail.com,2025-03-04 23:20
+EVENTO,DDD,Admin@gmail.com,2025-03-07 22:05
+EVENTO,Pruebas de servidor,Moderador,2025-03-14 11:00
+EVENTO,Examen final,Profesor,2025-03-15 09:00
+EVENTO,Reunion de estudio,Estudiante,2025-03-06 15:00
+EVENTO,Partido de tenis de mesa,Admin,2025-05-03 11:00

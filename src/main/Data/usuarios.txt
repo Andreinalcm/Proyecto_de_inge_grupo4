@@ -1,0 +1,5 @@
+Admin,Admin,Admin,Admin@gmail.com,Administrador
+Profesor,Profesor,Profesor,Profesor@gmail.com,Profesor
+Estudiante,Estudiante,Estudiante,Estudiante@gmail.com,Estudiante
+Moderador,Moderador,Moderador,Moderador@gmail.com,Moderador
+Apoyo,Apoyo,Apoyo,Apoyo@gmail.com,Personal de Apoyo
